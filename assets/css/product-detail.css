@@ -1,0 +1,201 @@
+/* Product detail inner pages (Super Bio Paper Cup, Plate, Salad Bowl, Tub, Boat Tray) */
+body { background: var(--off-white); }
+.page-hero {
+  background: linear-gradient(135deg, #051a05 0%, #0a2a0a 25%, #0d3a0d 50%, #145014 75%, #1a5e1a 100%);
+  padding: 180px 2rem 5rem;
+  min-height: 280px;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero-religious {
+  background: linear-gradient(135deg, #1a0f05 0%, #2d1810 25%, #4a2618 50%, #6b3820 75%, #8B4513 100%);
+}
+.page-hero-household {
+  background: linear-gradient(135deg, #000a1a 0%, #001030 25%, #001540 50%, #051a70 75%, #0a0a8a 100%);
+}
+.product-detail-img-laundry { background: linear-gradient(145deg, #fef9c3 0%, #fde047 50%, #facc15 100%); }
+.page-hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+.page-hero-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.2);
+  margin-bottom: 1rem;
+}
+.page-hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.page-hero-title em { font-style: normal; color: #fde68a; }
+.page-breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 2rem;
+}
+.page-breadcrumb a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+.page-breadcrumb a:hover { color: var(--white); }
+.page-breadcrumb span { color: rgba(255,255,255,0.35); }
+
+.product-detail-section { padding: 4rem 2rem 6rem; }
+.product-detail-inner { max-width: 1000px; margin: 0 auto; }
+.product-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--light-gray);
+}
+.product-detail-img-wrap {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: linear-gradient(135deg, #F6F6F6 0%, #E6E8E6 100%);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.product-detail-img-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Maya detail: two images in one row, content below */
+.product-detail-grid-maya {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.product-detail-grid-maya .product-detail-body {
+  width: 100%;
+}
+.product-detail-maya-img-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+.product-detail-maya-img-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #F6F6F6 0%, #E6E8E6 100%);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+}
+.product-detail-maya-img-item .product-detail-main-img {
+  max-height: 260px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+.product-detail-maya-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+@media (max-width: 640px) {
+  .product-detail-maya-img-row { grid-template-columns: 1fr; }
+}
+
+.product-detail-body {}
+.product-detail-subtitle {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gray);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.product-detail-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: var(--dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+.product-detail-specs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.product-detail-specs li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--light-gray);
+  font-size: 0.95rem;
+  color: var(--dark);
+}
+.product-detail-specs li:last-child { border-bottom: none; }
+.product-detail-desc {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--gray);
+  margin-bottom: 1.25rem;
+}
+.product-detail-img-maya { background: linear-gradient(145deg, #ffedd5 0%, #fdba74 50%, #fb923c 100%); }
+.product-detail-img-bio,
+.product-detail-img-wrap.product-detail-img-bio { background: linear-gradient(135deg, var(--dark) 0%, #2a0000 50%, var(--red-dark) 100%); }
+.product-detail-specs .spec-key {
+  font-weight: 700;
+  color: var(--gray);
+  min-width: 7rem;
+}
+.product-detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  font-weight: 600;
+  color: var(--red);
+  text-decoration: none;
+  transition: color 0.2s, gap 0.2s;
+}
+.product-detail-back:hover { color: var(--red-dark); gap: 0.75rem; }
+@media (max-width: 768px) {
+  .page-hero { padding: 140px 1.25rem 3rem; }
+  .page-hero-tag { font-size: 0.7rem; padding: 0.3rem 0.85rem; margin-bottom: 0.75rem; }
+  .page-hero-title { font-size: clamp(1.85rem, 7vw, 2.75rem); margin-bottom: 0.75rem; }
+  .page-breadcrumb { font-size: 0.78rem; margin-top: 1.25rem; }
+  .product-detail-grid { grid-template-columns: 1fr; gap: 2rem; padding: 1.5rem; }
+  .product-detail-section { padding: 3rem 1.25rem 4rem; }
+}
+
+@media (max-width: 540px) {
+  .page-hero { padding: 100px 1rem 2.5rem; }
+  .page-hero-tag { font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.28rem 0.75rem; margin-bottom: 0.6rem; }
+  .page-hero-title { font-size: clamp(1.5rem, 8vw, 2.2rem); margin-bottom: 0.6rem; }
+  .page-breadcrumb { font-size: 0.75rem; margin-top: 1rem; }
+  .product-detail-grid { padding: 1rem; gap: 1.5rem; }
+  .product-detail-section { padding: 2rem 1rem 3rem; }
+  .product-detail-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+  .product-detail-specs li { font-size: 0.9rem; padding: 0.5rem 0; }
+}

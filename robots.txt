@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Block admin / backend files
+Disallow: /assets/php/
+Disallow: /contact-mail.php
+Disallow: /reseller-mail.php
+
+# Block utility / build files
+Disallow: /AUDIT-REPORT.md
+
+Sitemap: https://superdistribution.mu/sitemap.xml

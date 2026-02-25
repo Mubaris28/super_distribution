@@ -1,0 +1,415 @@
+/* Reseller Application page */
+:root {
+  --reseller-blue: #0f172a;
+  --reseller-blue-muted: #1e293b;
+  --reseller-red: #e8171b;
+  --reseller-red-dark: #c0131a;
+  --reseller-red-pale: rgba(232,23,27,0.1);
+  --reseller-border: #e2e8f0;
+  --reseller-placeholder: #94a3b8;
+}
+
+body { background: #f1f5f9; }
+
+/* Page hero — shared pattern (mirrors contact.css) */
+.page-hero {
+  background: linear-gradient(135deg, var(--dark) 0%, #2a0000 50%, var(--red-dark) 100%);
+  padding: 180px 2rem 3.5rem;
+  min-height: 280px;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero.reseller-page-hero {
+  background: linear-gradient(135deg, var(--dark) 0%, #2a0000 50%, var(--red-dark) 100%);
+}
+.page-hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+.page-hero-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.2);
+  margin-bottom: 1rem;
+}
+.page-hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.page-hero-title em { font-style: normal; color: var(--red-light); }
+.page-hero-sub { color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.7; max-width: 560px; margin: 0 auto; }
+.page-breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 2rem;
+}
+.page-breadcrumb a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+.page-breadcrumb a:hover { color: var(--white); }
+.page-breadcrumb span { color: rgba(255,255,255,0.35); }
+
+.reseller-section {
+  padding: 3rem 1.5rem 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.reseller-card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+  border: 1px solid var(--reseller-border);
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 960px;
+}
+
+.reseller-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 1.75rem;
+  align-items: start;
+}
+
+.reseller-field-full { grid-column: 1 / -1; }
+
+.reseller-field { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.reseller-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-head);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--reseller-blue);
+}
+
+.reseller-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--reseller-blue);
+  flex-shrink: 0;
+}
+
+.reseller-optional { font-weight: 500; opacity: 0.85; }
+
+.reseller-input,
+.reseller-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--dark);
+  border: 1px solid var(--reseller-border);
+  border-radius: 10px;
+  background: var(--white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.reseller-input::placeholder,
+.reseller-textarea::placeholder { color: var(--reseller-placeholder); }
+
+.reseller-input:focus,
+.reseller-textarea:focus {
+  outline: none;
+  border-color: var(--reseller-blue-muted);
+  box-shadow: 0 0 0 3px rgba(15,23,42,0.1);
+}
+
+.reseller-textarea { resize: vertical; min-height: 80px; }
+
+.reseller-hint {
+  font-size: 0.9rem;
+  color: var(--reseller-placeholder);
+  margin: 0 0 0.75rem 0;
+}
+
+/* Option cards: radio (Reseller type) + checkbox (Service types) */
+.reseller-option-cards {
+  display: grid;
+  gap: 1rem;
+}
+.reseller-option-cards--radio {
+  grid-template-columns: repeat(2, 1fr);
+}
+.reseller-option-cards--check {
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.reseller-option-card {
+  position: relative;
+  cursor: pointer;
+  margin: 0;
+}
+.reseller-option-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+.reseller-option-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding: 1.25rem 1.25rem;
+  border: 2px solid var(--reseller-border);
+  border-radius: 14px;
+  background: #f8fafc;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.reseller-option-card:hover .reseller-option-card-inner {
+  border-color: var(--reseller-blue-muted);
+  background: #f1f5f9;
+}
+.reseller-option-card .reseller-option-input:focus-visible + .reseller-option-card-inner {
+  outline: 2px solid var(--reseller-blue);
+  outline-offset: 2px;
+}
+.reseller-option-card .reseller-option-input:checked + .reseller-option-card-inner {
+  border-color: var(--reseller-red);
+  background: var(--reseller-red-pale);
+  box-shadow: 0 0 0 1px var(--reseller-red);
+}
+
+.reseller-option-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 0.15rem;
+}
+.reseller-option-title {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--reseller-blue);
+  letter-spacing: -0.01em;
+}
+.reseller-option-desc {
+  font-size: 0.85rem;
+  color: var(--reseller-placeholder);
+  line-height: 1.4;
+}
+
+@media (max-width: 720px) {
+  .reseller-option-cards--radio { grid-template-columns: 1fr; }
+  .reseller-option-cards--check { grid-template-columns: 1fr 1fr; }
+}
+
+.reseller-upload { margin-top: 0.25rem; }
+
+.reseller-upload-zone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  border: 2px dashed var(--reseller-border);
+  border-radius: 12px;
+  background: #f8fafc;
+  min-height: 160px;
+}
+
+.reseller-upload-icon { font-size: 2.5rem; }
+
+.reseller-upload-text {
+  font-size: 0.9rem;
+  color: var(--reseller-placeholder);
+}
+
+.reseller-file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.reseller-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  background: var(--reseller-red);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.reseller-upload-btn:hover {
+  background: var(--reseller-red-dark);
+  transform: translateY(-1px);
+}
+
+.reseller-upload-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--reseller-placeholder);
+}
+
+.reseller-upload-note::before {
+  content: 'ℹ';
+  color: var(--reseller-red);
+  font-weight: bold;
+}
+
+.reseller-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  margin-top: 0.5rem;
+  font-family: var(--font-head);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--reseller-red);
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(232,23,27,0.35);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.reseller-submit:hover:not(:disabled) {
+  background: var(--reseller-red-dark);
+  box-shadow: 0 6px 20px rgba(232,23,27,0.4);
+  transform: translateY(-2px);
+}
+
+.reseller-submit:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+/* Success message after submit */
+.reseller-success {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  animation: rSuccessFade 0.45s ease;
+}
+@keyframes rSuccessFade {
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+.reseller-success-icon {
+  width: 80px;
+  height: 80px;
+  background: #dcfce7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  box-shadow: 0 0 0 10px #f0fdf4;
+}
+.reseller-success-title {
+  font-family: var(--font-head);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #15803d;
+  margin-bottom: 0.75rem;
+}
+.reseller-success-sub {
+  color: #64748b;
+  font-size: 0.97rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.reseller-success-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.reseller-success-link {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  background: var(--reseller-red);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.2s;
+  border: 2px solid var(--reseller-red);
+}
+.reseller-success-link:hover {
+  background: var(--reseller-red-dark);
+  border-color: var(--reseller-red-dark);
+  transform: translateY(-2px);
+}
+.reseller-success-link--outline {
+  background: transparent;
+  color: var(--reseller-red);
+}
+.reseller-success-link--outline:hover {
+  background: var(--reseller-red);
+  color: var(--white);
+}
+
+/* Error banner */
+.reseller-server-error {
+  display: none;
+  align-items: flex-start;
+  gap: 0.6rem;
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font-size: 0.88rem;
+  color: #b91c1c;
+  line-height: 1.5;
+  margin-top: 1rem;
+}
+
+@media (max-width: 720px) {
+  .reseller-form { grid-template-columns: 1fr; }
+  .reseller-card { padding: 1.5rem 1.25rem; max-width: 100%; }
+  .reseller-option-cards--check { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 540px) {
+  .reseller-hero { padding: 120px 1rem 2rem; min-height: 220px; }
+  .reseller-title { font-size: clamp(1.5rem, 6vw, 2.25rem); }
+  .reseller-sub { font-size: 0.9rem; }
+  .reseller-section { padding: 2rem 1rem 3rem; }
+  .reseller-card { padding: 1.25rem 1rem; }
+  .reseller-option-cards--radio,
+  .reseller-option-cards--check { grid-template-columns: 1fr; }
+}
