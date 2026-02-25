@@ -405,11 +405,12 @@ body { background: #f1f5f9; }
 }
 
 @media (max-width: 540px) {
-  .reseller-hero { padding: 120px 1rem 2rem; min-height: 220px; }
+  .reseller-hero { padding: 1rem 2rem; min-height: 220px; }
   .reseller-title { font-size: clamp(1.5rem, 6vw, 2.25rem); }
   .reseller-sub { font-size: 0.9rem; }
   .reseller-section { padding: 2rem 1rem 3rem; }
   .reseller-card { padding: 1.25rem 1rem; }
   .reseller-option-cards--radio,
   .reseller-option-cards--check { grid-template-columns: 1fr; }
+  .page-hero.reseller-page-hero { padding: 50px 1rem 2.5rem;}
 }

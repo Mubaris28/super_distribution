@@ -66,7 +66,8 @@
 
 .banner-slide-bg-pattern {
   position: absolute; inset: 0;
-  background-image: radial-gradient(ellipse 120% 100% at 50% 50%, rgba(255,255,255,0.02) 0%, transparent 70%);
+  /* No overlay — only the slide's own gradient (on .banner-slide-bg) shows */
+  background: none;
   pointer-events: none;
 }
 
@@ -114,14 +115,16 @@
 .banner-ujala-shape {
   position: absolute; width: 100%; height: 100%;
   border-radius: 42% 58% 65% 35% / 45% 52% 48% 55%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 50%, rgba(10,30,120,0.25) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(200, 230, 255, 0.06) 50%, rgba(30, 80, 140, 0.25) 100%);
   z-index: 0;
+  animation: banner-shape-morph 12s ease-in-out infinite;
 }
 
 .banner-ujala-glow {
   position: absolute; width: 90%; height: 90%; border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.12) 0%, transparent 65%);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 45%, transparent 70%);
   z-index: 0;
+  animation: banner-glow-float 8s ease-in-out infinite;
 }
 
 .banner-ujala-image .banner-ujala-img { position: relative; z-index: 1; }
@@ -130,20 +133,40 @@
 
 .banner-ujala-image { margin-left: 1.5rem; }
 
+/* Subtle morph animation for hero blob shapes */
+@keyframes banner-shape-morph {
+  0%, 100% { border-radius: 42% 58% 65% 35% / 45% 52% 48% 55%; transform: scale(1); }
+  25%      { border-radius: 58% 42% 35% 65% / 52% 45% 55% 48%; transform: scale(1.02); }
+  50%      { border-radius: 35% 65% 58% 42% / 48% 55% 45% 52%; transform: scale(0.98); }
+  75%      { border-radius: 65% 35% 42% 58% / 55% 48% 52% 45%; transform: scale(1.01); }
+}
+
+@keyframes banner-glow-float {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.05); opacity: 0.9; }
+}
+
 .banner-slide-shape {
   position: absolute; width: 100%; height: 100%;
   border-radius: 42% 58% 65% 35% / 45% 52% 48% 55%;
+  background: transparent; /* only slide gradient shows */
   z-index: 0;
+  animation: banner-shape-morph 12s ease-in-out infinite;
 }
 
-.banner-slide-shape-bio { background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 50%, rgba(20,80,40,0.3) 100%); }
+.banner-slide-shape-bio {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(5, 255, 0, 0.02) 50%, rgba(20, 80, 40, 0.3) 100%);
+}
 
-.banner-slide-shape-margo { background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(200,0,50,0.15) 50%, rgba(80,20,30,0.25) 100%); }
+.banner-slide-shape-margo {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(40, 80, 30, 0.08) 50%, rgba(30, 60, 25, 0.25) 100%);
+}
 
 .banner-slide-glow {
   position: absolute; width: 90%; height: 90%; border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 65%);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 45%, transparent 70%);
   z-index: 0;
+  animation: banner-glow-float 8s ease-in-out infinite;
 }
 
 .banner-slide-image-mouse { will-change: transform; transition: transform 0.5s ease-out; }
@@ -176,7 +199,8 @@
 
 .banner-arrow:hover {
   background: var(--white); color: var(--red); border-color: var(--white);
-  transform: translateY(-50%) scale(1.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .prev-arrow { left: 1.5rem; }
@@ -238,12 +262,6 @@
   .banner-slide-content { flex-direction: column; justify-content: flex-start; padding: 7.75rem 0 0; gap: 0; min-height: 100%; }
   .banner-slide-text { text-align: center; max-width: 100%; order: 1; flex: 0 0 auto; padding: 0 1.75rem 1rem; margin: 0 1rem 0; background: transparent; border: none; border-radius: 0; }
   .banner-slide-image-wrap { position: relative; display: flex; max-width: 100%; order: 2; margin: 0; padding: 0; min-height: 28vh; align-items: center; justify-content: center; flex-shrink: 0; }
-  .banner-slide-image-wrap::before {
-    content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 160%; height: 90%; border-radius: 50% 50% 0 0;
-    background: radial-gradient(ellipse 75% 50% at 50% 100%, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 40%, transparent 65%);
-    pointer-events: none; z-index: 0;
-  }
   .banner-slide-image-wrap .banner-slide-image { position: relative; z-index: 1; }
   .banner-slide-tag { margin-bottom: 0.75rem; }
   .banner-slide-title { margin-bottom: 0.75rem; font-size: clamp(2.25rem, 7vw, 3.5rem); }
@@ -251,8 +269,8 @@
   .banner-slide-image { width: 320px; height: 320px; max-width: 88vw; max-height: 88vw; }
   .banner-ujala-image-wrap { justify-content: center; margin-left: 0; padding-left: 0; padding-right: 0; }
   .banner-ujala-image { margin-left: 0; }
-  .banner-slide-shape, .banner-ujala-shape { opacity: 0.85; }
-  .banner-slide-glow, .banner-ujala-glow { opacity: 0.8; }
+  .banner-slide-shape, .banner-ujala-shape,
+  .banner-slide-glow, .banner-ujala-glow { opacity: 1; }
   .banner-slide-number { display: none !important; }
   .scroll-indicator { display: none; }
   .banner-arrow { width: 44px; height: 44px; }
@@ -269,16 +287,61 @@
   .banner-slide-title { font-size: clamp(2.25rem, 8vw, 3.25rem); }
   .banner-slide-desc { font-size: 0.9rem; }
   .scroll-indicator { display: none; }
+  /* Remove shadows on mobile only — keep on desktop/tablet for balance */
+  .banner-slide-title { text-shadow: none; }
+  .banner-product-img { filter: none; }
+  .banner-arrow:hover { box-shadow: none; }
 }
 
 @media (max-width: 540px) {
-  .banner-slide-content { padding-top: 1.0rem; }
-  .banner-slide-image-wrap { min-height: 20vh; }
-  .banner-slide-image { width: 260px; height: 260px; max-width: 82vw; max-height: 82vw; }
-  .banner-slide-text { padding: 0 1.25rem 1rem; margin: 0 0.75rem 0; }
-  .banner-slide-tag { font-size: 0.65rem; padding: 0.4rem 0.85rem; margin-bottom: 0.5rem; }
+  .banner {
+    height: 86vh;
+    min-height: 86vh;
+    display: flex;
+    flex-direction: column;
+    background: #0d1117;
+  }
+  .banner .banner-slider {
+    flex: 1;
+    min-height: 0;
+    height: 100%;
+  }
+  .banner .banner-slide,
+  .banner .banner-slide-bg {
+    bottom: 0; /* force background to extend to section bottom */
+  }
+  .banner-slide-content {
+    padding: 0 1.25rem;
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: clamp(1rem, 3vh, 2rem);
+    min-height: 100%;
+    flex: 1;
+  }
+  .banner-slide-text {
+    padding: 0;
+    margin: 0;
+    flex: 0 0 auto;
+    order: 1;
+  }
+  .banner-slide-image-wrap {
+    flex: 0 0 auto;
+    order: 2;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .banner-slide-image {
+    width: 260px;
+    height: 260px;
+    max-width: 82vw;
+    max-height: 38vh;
+  }
+  .banner-slide-tag { font-size: 0.7rem; padding: 0.4rem 0.85rem; margin-bottom: 0.5rem; }
   .banner-slide-title { font-size: clamp(2.5rem, 11vw, 3.5rem); margin-bottom: 0.5rem; }
-  .banner-slide-desc { font-size: 0.9rem; line-height: 1.65; max-width: 100%; }
+  .banner-slide-desc { font-size: 0.95rem; line-height: 1.65; max-width: 100%; }
 }
 
 @media (max-width: 400px) {

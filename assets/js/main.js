@@ -185,17 +185,31 @@ document.querySelectorAll('.mm-link').forEach(link => link.addEventListener('cli
   }
 
   function openSearch() {
+    var scrollbarW = window.innerWidth - document.documentElement.clientWidth;
+    document.documentElement.classList.add('search-overlay-open');
+    document.body.classList.add('search-overlay-open');
+    document.body.style.setProperty('--scrollbar-w', scrollbarW + 'px');
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = scrollbarW > 0 ? scrollbarW + 'px' : '';
+    document.documentElement.style.overflow = 'hidden';
     overlay.classList.add('open');
     overlay.setAttribute('aria-hidden', 'false');
     input.value = '';
     renderCards('');
     input.focus();
-    document.body.style.overflow = 'hidden';
   }
   function closeSearch() {
     overlay.classList.remove('open');
     overlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    /* Delay clearing body styles until overlay close animation finishes to prevent layout shift/vibration */
+    setTimeout(function() {
+      document.documentElement.classList.remove('search-overlay-open');
+      document.body.classList.remove('search-overlay-open');
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+      document.body.style.removeProperty('--scrollbar-w');
+      document.documentElement.style.overflow = '';
+    }, 380);
   }
 
   searchBtn.addEventListener('click', openSearch);
