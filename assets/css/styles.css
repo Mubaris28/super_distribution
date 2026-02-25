@@ -2522,7 +2522,7 @@ a.product-card-link:hover::after {
   .nav-promo-bar { display: none; }
   /* Collection product image — consistent max size */
   .coll-new-img-wrap .coll-new-product-img {
-    max-width: 300px !important;
+    max-width: 260px !important;
     max-height: 300px !important;
     object-fit: contain;
   }
@@ -2544,7 +2544,7 @@ a.product-card-link:hover::after {
   .coll-new-cta { padding: 0.65rem 1.25rem; font-size: 0.75rem; }
   .coll-new-right { min-height: 180px; padding: 1rem 0.75rem; display: flex; align-items: center; justify-content: center; }
   .coll-new-img-wrap { width: 140px; height: 140px; max-width: 140px; margin-left: 0; flex-shrink: 0; }
-  .coll-new-img-wrap .coll-new-product-img { max-width: 300px !important; max-height: 300px !important; object-fit: contain; }
+  .coll-new-img-wrap .coll-new-product-img { max-width: 260px !important; max-height: 300px !important; object-fit: contain; }
   .coll-accent-maya .coll-new-img-wrap,
   .coll-accent-margo .coll-new-img-wrap,
   .coll-accent-ujala .coll-new-img-wrap,
