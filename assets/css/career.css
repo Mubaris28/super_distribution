@@ -275,4 +275,8 @@
 
 @media (max-width: 540px) {
   .career-cards { grid-template-columns: 1fr; }
+    .career-hero {
+      padding: 50px 1.25rem 3rem;
+      min-height: 280px;
+    }
 }
