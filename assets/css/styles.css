@@ -2221,6 +2221,11 @@ a.product-card-link:hover::after {
   transform: scale(1.15);
 }
 
+.social-link svg {
+  width: 20px;
+  height: 20px;
+}
+
 .footer-col h4 {
   font-family: var(--font-head);
   font-size: 0.9rem;
