@@ -1,12 +1,11 @@
+# Super Distribution Mauritius - Allow all search engines for full island & international coverage
 User-agent: *
 Allow: /
 
-# Block admin / backend files
+# Block backend / sensitive
 Disallow: /assets/php/
 Disallow: /contact-mail.php
 Disallow: /reseller-mail.php
 
-# Block utility / build files
-Disallow: /AUDIT-REPORT.md
-
+# Sitemap - submit this URL in Google Search Console & Bing Webmaster Tools
 Sitemap: https://superdistribution.mu/sitemap.xml
