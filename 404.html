@@ -93,6 +93,12 @@
   </style>
 </head>
 <body>
+  <div id="pageLoader" class="page-loader" aria-hidden="true">
+    <div class="page-loader-inner">
+      <div class="page-loader-spinner"></div>
+      <p class="page-loader-text">Loading</p>
+    </div>
+  </div>
   <div class="error-wrap">
     <div class="error-logo">
       <a href="index.html">
@@ -114,5 +120,17 @@
       <a href="reseller-application.html">Become a Reseller</a>
     </nav>
   </div>
+  <script>
+    (function() {
+      var loader = document.getElementById('pageLoader');
+      if (!loader) return;
+      function hide() {
+        loader.classList.add('loaded');
+        setTimeout(function() { loader.remove(); }, 450);
+      }
+      if (document.readyState === 'complete') hide();
+      else window.addEventListener('load', hide);
+    })();
+  </script>
 </body>
 </html>

@@ -5,6 +5,33 @@
 
 'use strict';
 
+/* =========================================
+   PAGE LOADER — hide when page ready (all pages)
+   ========================================= */
+(function pageLoader() {
+  var loader = document.getElementById('pageLoader');
+  if (!loader) return;
+  var minShow = 500;
+  var start = Date.now();
+
+  function hideLoader() {
+    var elapsed = Date.now() - start;
+    var delay = Math.max(0, minShow - elapsed);
+    setTimeout(function() {
+      loader.classList.add('loaded');
+      setTimeout(function() {
+        loader.remove();
+      }, 450);
+    }, delay);
+  }
+
+  if (document.readyState === 'complete') {
+    hideLoader();
+  } else {
+    window.addEventListener('load', hideLoader);
+  }
+})();
+
 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
