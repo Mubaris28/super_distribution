@@ -6,29 +6,31 @@
 'use strict';
 
 /* =========================================
-   PAGE LOADER — hide when page ready (all pages)
+   PAGE LOADER — hide when DOM ready (never block navigation)
    ========================================= */
 (function pageLoader() {
   var loader = document.getElementById('pageLoader');
   if (!loader) return;
-  var minShow = 500;
+  var minShow = 350;
   var start = Date.now();
+  var hidden = false;
 
   function hideLoader() {
+    if (hidden) return;
+    hidden = true;
     var elapsed = Date.now() - start;
     var delay = Math.max(0, minShow - elapsed);
     setTimeout(function() {
       loader.classList.add('loaded');
-      setTimeout(function() {
-        loader.remove();
-      }, 450);
+      setTimeout(function() { loader.remove(); }, 400);
     }, delay);
   }
 
-  if (document.readyState === 'complete') {
-    hideLoader();
+  // Hide on DOMContentLoaded so page never stays stuck (e.g. Products page)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(hideLoader, 50); });
   } else {
-    window.addEventListener('load', hideLoader);
+    setTimeout(hideLoader, 50);
   }
 })();
 

@@ -33,23 +33,28 @@
     </div>
   </div>
   <header id="header">
-    <div class="nav-promo-bar"><span>🏠 Mauritius's Trusted Household Goods Distributor &nbsp;|&nbsp; 🚚 Fast Dispatch &nbsp;|&nbsp; 📦 Wholesale &amp; Retail &nbsp;|&nbsp; ⭐ 4.9 Star Rated</span></div>
+    <div class="nav-promo-bar">
+      <span>🏠 Mauritius's Trusted Household Goods Distributor &nbsp;|&nbsp; 🚚 Fast Dispatch &nbsp;|&nbsp; 📦 Wholesale &amp; Retail &nbsp;|&nbsp; ⭐ 4.9 Star Rated</span>
+    </div>
     <nav class="navbar">
-      <a href="index.html" class="nav-logo"><img src="assets/images/logo/SD_LOGO-01.png" alt="Super Distribution" class="nav-logo-img nav-logo-1"></a>
+      <a href="index.html" class="nav-logo">
+        <img src="assets/images/logo/SD_LOGO-01.png" alt="Super Distribution" class="nav-logo-img">
+      </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="clients.html" class="nav-link">Our Clients</a></li>
         <li><a href="products.html" class="nav-link">Products</a></li>
-        <li><a href="compostable.html" class="nav-link">Compostable</a></li>
-        <li><a href="household.html" class="nav-link">Household</a></li>
-        <li><a href="stationary.html" class="nav-link active">Stationery</a></li>
-        <li><a href="religious.html" class="nav-link">Religious</a></li>
-        <li><a href="cosmetic.html" class="nav-link">Cosmetic</a></li>
+        <li><a href="career.html" class="nav-link">Careers</a></li>
         <li><a href="contact.html" class="nav-link nav-link-cta">Contact Us</a></li>
       </ul>
       <div class="nav-actions">
-        <button class="icon-btn search-btn" aria-label="Search"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        <button class="icon-btn search-btn" aria-label="Search">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" type="button">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </nav>
   </header>
@@ -120,6 +125,7 @@
         <h4>Company</h4>
         <ul>
           <li><a href="about.html">About Us</a></li>
+          <li><a href="clients.html">Our Clients</a></li>
           <li><a href="career.html">Careers</a></li>
           <li><a href="reseller-application.html">Become a Partner</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -140,8 +146,18 @@
       <p>© 2026 Super Distribution Ltd. All rights reserved.</p>
     </div>
   </footer>
-  <div class="mobile-menu" id="mobileMenu"><button class="mobile-menu-close" id="menuClose">✕</button><ul><li><a href="index.html" class="mm-link">Home</a></li><li><a href="about.html" class="mm-link">About</a></li><li><a href="products.html" class="mm-link">Products</a></li><li><a href="compostable.html" class="mm-link">Compostable</a></li><li><a href="household.html" class="mm-link">Household</a></li><li><a href="stationary.html" class="mm-link">Stationery</a></li><li><a href="religious.html" class="mm-link">Religious</a></li><li><a href="cosmetic.html" class="mm-link">Cosmetic</a></li><li><a href="contact.html" class="mm-link">Contact Us</a></li></ul></div>
-  <div class="mobile-menu-overlay" id="menuOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <button class="mobile-menu-close" id="menuClose" type="button" aria-label="Close menu">✕</button>
+    <ul class="mobile-menu-list">
+      <li><a href="index.html" class="mm-link">Home</a></li>
+      <li><a href="about.html" class="mm-link">About</a></li>
+      <li><a href="clients.html" class="mm-link">Our Clients</a></li>
+      <li><a href="products.html" class="mm-link">Products</a></li>
+      <li><a href="career.html" class="mm-link">Careers</a></li>
+      <li><a href="contact.html" class="mm-link">Contact Us</a></li>
+    </ul>
+  </div>
+  <div class="mobile-menu-overlay" id="menuOverlay" aria-hidden="true"></div>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="assets/js/main.js"></script>

@@ -1,0 +1,681 @@
+/* ============================================
+   CLIENTS PAGE — World Map + Client Cards
+   ============================================ */
+
+body { background: var(--white); }
+
+/* ---- HERO ---- */
+.clients-hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d1117 0%, #1a1117 30%, var(--red-dark) 70%, var(--red) 100%);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 120px;
+}
+.clients-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 15% 50%, rgba(232,23,27,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.clients-hero-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.clients-hero-text { }
+.clients-hero-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 1rem;
+}
+.clients-hero-heading {
+  font-family: var(--font-head);
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 900;
+  color: rgba(255,255,255,0.08);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  position: relative;
+  user-select: none;
+}
+.clients-hero-heading-over {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+.clients-hero-heading-over span:first-child {
+  font-family: var(--font-head);
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 900;
+  color: rgba(255,255,255,0.15);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.clients-hero-title-wrap { position: relative; margin-bottom: 1.5rem; }
+.clients-hero-title-big {
+  font-family: var(--font-head);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.clients-hero-title-big .th-our {
+  font-size: clamp(1.25rem, 2.8vw, 2rem);
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  line-height: 1.2;
+  display: block;
+}
+.clients-hero-title-big .th-clients {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  line-height: 0.88;
+  display: block;
+}
+.clients-hero-title-big .th-clients em {
+  font-style: normal;
+  color: var(--red-light);
+}
+
+.clients-hero-desc {
+  color: rgba(255,255,255,0.75);
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 380px;
+  margin-bottom: 2rem;
+}
+.clients-hero-stats {
+  display: flex;
+  gap: 2rem;
+}
+.clients-hero-stat-num {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+}
+.clients-hero-stat-label {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 0.2rem;
+}
+
+/* ---- MAPS (hero + Our Global Reach — no overlay) ---- */
+
+/* Disable hover on non-client regions so only MU, CN, IN, VN, AE show tooltips */
+#clients-world-map path[class*="jsvectormap-region"]:not([class*="region-mu"]):not([class*="region-cn"]):not([class*="region-in"]):not([class*="region-vn"]):not([class*="region-ae"]),
+#clients-map-global-reach path[class*="jsvectormap-region"]:not([class*="region-mu"]):not([class*="region-cn"]):not([class*="region-in"]):not([class*="region-vn"]):not([class*="region-ae"]) {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+/* Hero map intro zoom — 0–2s */
+.map-intro-anim {
+  animation: mapIntroZoom 2s cubic-bezier(0.22,1,0.36,1) forwards;
+  transform-origin: 67% 48%;
+}
+@keyframes mapIntroZoom {
+  0%   { transform: scale(3.2); opacity: 0; }
+  12%  { opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Map container */
+.clients-map-wrap {
+  position: relative;
+  height: 420px;
+  overflow: visible !important;
+}
+#clients-world-map {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+/* Hero: connecting lines (Mauritius → all locations), above map */
+#clients-world-map .hero-map-connecting-lines {
+  pointer-events: none;
+}
+#clients-world-map .hero-map-connecting-lines path {
+  stroke: rgba(255,255,255,0.6);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+/* Hero: country names at each location (after arc animation) */
+#clients-world-map .hero-map-labels {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+}
+#clients-world-map .hero-map-location-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-head);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  white-space: nowrap;
+  opacity: 0;
+  animation: heroLabelFadeIn 0.55s ease-out forwards;
+}
+@keyframes heroLabelFadeIn {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+/* Hero: marker pop — starts 0.7s, 0.65s each, staggered */
+#clients-world-map .jvm-marker,
+#clients-world-map .jvm-element,
+#clients-world-map circle[class*="marker"] {
+  animation: heroMarkerPop 0.65s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  opacity: 0;
+  transform-origin: center;
+}
+#clients-world-map .jvm-marker:nth-child(1),
+#clients-world-map .jvm-element:nth-child(1) { animation-delay: 0.7s; }
+#clients-world-map .jvm-marker:nth-child(2),
+#clients-world-map .jvm-element:nth-child(2) { animation-delay: 0.82s; }
+#clients-world-map .jvm-marker:nth-child(3),
+#clients-world-map .jvm-element:nth-child(3) { animation-delay: 0.94s; }
+#clients-world-map .jvm-marker:nth-child(4),
+#clients-world-map .jvm-element:nth-child(4) { animation-delay: 1.06s; }
+#clients-world-map .jvm-marker:nth-child(5),
+#clients-world-map .jvm-element:nth-child(5) { animation-delay: 1.18s; }
+#clients-world-map .jvm-marker:nth-child(6),
+#clients-world-map .jvm-element:nth-child(6) { animation-delay: 1.3s; }
+@keyframes heroMarkerPop {
+  0%   { opacity: 0; transform: scale(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+/* Hero: no country name on hover — hide tooltips in this map only */
+.clients-map-wrap .jvectormap-tip,
+.clients-map-wrap .jsvectormap-tip,
+.clients-map-wrap [class*="jvectormap-tip"] {
+  display: none !important;
+}
+/* jsvectormap region override — allow tooltips to show outside map */
+.jvectormap-container {
+  width: 100%;
+  height: 100%;
+  overflow: visible !important;
+}
+/* Prevent any map wrapper from clipping hover tooltips */
+#clients-world-map,
+#clients-map-global-reach {
+  overflow: visible !important;
+}
+#clients-world-map .jvectormap-container,
+#clients-map-global-reach .jvectormap-container {
+  overflow: visible !important;
+}
+/* Tooltip — fixed to viewport so it's never behind/clipped by the plugin */
+.jvectormap-tip,
+.jsvectormap-tip,
+[class*="jvectormap-tip"],
+[class*="jsvectormap-tip"] {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  background: #0d1117 !important;
+  border: 2px solid var(--red) !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  padding: 0.45rem 0.9rem !important;
+  pointer-events: none !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.55), 0 0 0 1px rgba(232,23,27,0.3) !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.01em !important;
+  max-width: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ---- INTERACTIVE MAP SECTION ---- */
+.clients-map-section {
+  padding: 5rem 2rem;
+  background: var(--white);
+}
+.clients-map-section-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.clients-map-section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.clients-map-section-header h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  color: var(--dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.clients-map-section-header h2 em { font-style: normal; color: var(--red); }
+.clients-map-section-header p { color: var(--gray); font-size: 1rem; max-width: 500px; margin: 0 auto; }
+
+/* Our Global Reach section — dedicated map (separate from hero) */
+#clients-map-global-reach.clients-map-global-reach,
+#clients-map-global-reach {
+  width: 100%;
+  height: 520px;
+  border-radius: var(--radius-xl);
+  overflow: visible;
+  border: 1px solid var(--light-gray);
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+.clients-map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.clients-map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--gray);
+}
+.clients-map-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-blue { background: #1d4ed8; }
+.dot-red { background: var(--red); }
+.dot-gray { background: #d1d5db; }
+
+/* ---- CLIENT CARDS SECTION ---- */
+.clients-cards-section {
+  padding: 4.5rem 2rem;
+  background: var(--off-white);
+}
+.clients-cards-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.clients-cards-header {
+  margin-bottom: 2.5rem;
+}
+.clients-cards-header h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 0.4rem;
+}
+.clients-cards-header p { color: var(--gray); font-size: 0.95rem; }
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.client-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--light-gray);
+  box-shadow: var(--shadow-card);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s, border-color 0.3s;
+}
+.client-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(232,23,27,0.2);
+}
+.client-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.client-card-flag {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--red-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+.client-card-country {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+.client-card-region {
+  font-size: 0.78rem;
+  color: var(--red);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.client-card-desc {
+  font-size: 0.9rem;
+  color: var(--gray);
+  line-height: 1.7;
+}
+.client-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.client-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  background: var(--near-white);
+  color: var(--gray);
+  border: 1px solid var(--light-gray);
+}
+
+/* ---- ISLAND FOCUS INSET ---- */
+.island-focus-wrap {
+  position: relative;
+  margin: 0 0 2.5rem 0;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid rgba(29,78,216,0.2);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+}
+.island-focus-label {
+  position: absolute;
+  top: 14px; left: 14px;
+  background: rgba(232,23,27,0.85);
+  color: white;
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.75rem;
+  border-radius: 9999px;
+  z-index: 3;
+  pointer-events: none;
+}
+.island-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+}
+
+/* ---- WHERE WE WORK — enhanced ---- */
+.clients-wwwork {
+  padding: 5rem 2rem;
+  background: var(--off-white);
+}
+.clients-wwwork-inner { max-width: 1200px; margin: 0 auto; }
+.clients-wwwork-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.clients-wwwork-header h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 900;
+  color: var(--dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+.clients-wwwork-header h2 em { font-style: normal; color: var(--red); }
+.clients-wwwork-header p { color: var(--gray); font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.wwwork-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.wwwork-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  border: 1.5px solid var(--light-gray);
+  overflow: hidden;
+  position: relative;
+  padding: 1.75rem;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.wwwork-card:hover {
+  border-color: var(--red);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+}
+.wwwork-featured {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #0d1117 0%, #1a0a0a 45%, #8b0000 100%);
+  border-color: rgba(232,23,27,0.5);
+}
+.wwwork-featured .wwwork-country { color: white; }
+.wwwork-featured .wwwork-role { color: rgba(255,180,180,0.95); }
+.wwwork-featured .wwwork-desc { color: rgba(255,255,255,0.7); }
+.wwwork-featured .wwwork-tags span { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); }
+.wwwork-card-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+.wwwork-flag {
+  font-size: 2.2rem;
+  margin-bottom: 0.9rem;
+  line-height: 1;
+}
+.wwwork-role {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.25rem;
+}
+.wwwork-country {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 0.65rem;
+  letter-spacing: -0.01em;
+}
+.wwwork-desc {
+  font-size: 0.88rem;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 0.9rem;
+}
+.wwwork-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.wwwork-tags span {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.22rem 0.65rem;
+  border-radius: 9999px;
+  background: var(--off-white);
+  border: 1px solid var(--light-gray);
+  color: var(--gray);
+}
+
+/* ---- PARTNER BRAND LOGOS ---- */
+.clients-brands-section {
+  padding: 4rem 2rem;
+  background: white;
+  border-top: 1px solid var(--light-gray);
+}
+.clients-brands-inner { max-width: 1100px; margin: 0 auto; }
+.clients-brands-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.clients-brands-header h3 {
+  font-family: var(--font-head);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+.clients-brands-header h3 em { font-style: normal; color: var(--red); }
+.clients-brands-header p { color: var(--gray); font-size: 0.9rem; }
+.clients-brands-logos {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+}
+.cb-logo-card {
+  background: var(--off-white);
+  border: 1.5px solid var(--light-gray);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  aspect-ratio: 1;
+  transition: border-color 0.22s, transform 0.22s, box-shadow 0.22s;
+}
+.cb-logo-card:hover {
+  border-color: var(--red);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.cb-logo-card img {
+  max-width: 100%;
+  max-height: 64px;
+  object-fit: contain;
+  filter: grayscale(0.2);
+  transition: filter 0.22s;
+}
+.cb-logo-card:hover img { filter: grayscale(0); }
+
+/* ---- PARTNER STATS STRIP ---- */
+.clients-stats-strip {
+  padding: 3.5rem 2rem;
+  background: linear-gradient(135deg, var(--dark) 0%, #1a0a0a 50%, var(--red-dark) 100%);
+  color: var(--white);
+}
+.clients-stats-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+.clients-stat {
+  padding: 1.5rem 1rem;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.clients-stat:last-child { border-right: none; }
+.clients-stat-num {
+  font-family: var(--font-head);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.clients-stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); font-weight: 500; }
+
+/* ---- BECOME A PARTNER CTA ---- */
+.clients-cta {
+  padding: 4rem 2rem;
+  background: var(--white);
+  text-align: center;
+}
+.clients-cta-inner { max-width: 600px; margin: 0 auto; }
+.clients-cta h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 0.75rem;
+}
+.clients-cta h2 em { font-style: normal; color: var(--red); }
+.clients-cta p { color: var(--gray); font-size: 1rem; line-height: 1.7; margin-bottom: 1.75rem; }
+.clients-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.25rem;
+  background: var(--red);
+  color: white;
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.clients-cta-btn:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: var(--shadow-red); }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  .clients-hero-inner { grid-template-columns: 1fr; }
+  .clients-map-wrap { height: 300px; }
+  .clients-stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .clients-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .clients-stat:nth-child(2n) { border-right: none; }
+}
+@media (max-width: 1024px) {
+  .wwwork-grid { grid-template-columns: 1fr 1fr; }
+  .wwwork-featured { grid-column: span 2; }
+  .clients-brands-logos { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .clients-hero { min-height: auto; padding-top: 100px; }
+  .clients-hero-inner { padding: 3rem 1.25rem; }
+  .clients-map-section { padding: 3rem 1.25rem; }
+  #clients-map-global-reach { height: 320px; }
+  .clients-wwwork { padding: 3rem 1.25rem; }
+  .wwwork-grid { grid-template-columns: 1fr; }
+  .wwwork-featured { grid-column: span 1; }
+  .clients-brands-logos { grid-template-columns: repeat(3, 1fr); }
+  .clients-stats-strip { padding: 2.5rem 1.25rem; }
+  .clients-stats-inner { grid-template-columns: 1fr 1fr; }
+  .clients-cta { padding: 3rem 1.25rem; }
+}
+@media (max-width: 540px) {
+  .clients-grid { grid-template-columns: 1fr; }
+  .clients-hero-stats { flex-direction: column; gap: 1rem; }
+}
