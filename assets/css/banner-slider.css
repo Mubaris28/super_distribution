@@ -293,11 +293,10 @@
   .banner-arrow:hover { box-shadow: none; }
 }
 
-/* Real mobile: use dvh so height matches visible viewport (fixes "different on phone" vs PC) */
 @media (max-width: 540px) {
   .banner {
-    height: min(86vh, 86dvh);
-    min-height: min(86vh, 86dvh);
+    height: 86vh;
+    min-height: 86vh;
     display: flex;
     flex-direction: column;
     background: #0d1117;
@@ -331,23 +330,18 @@
     flex: 0 0 auto;
     order: 2;
     min-height: 0;
-    padding: 0 0.5rem;
+    padding: 0;
     margin: 0;
   }
   .banner-slide-image {
     width: 260px;
     height: 260px;
     max-width: 82vw;
-    max-height: min(38vh, 34dvh);
+    max-height: 38vh;
   }
   .banner-slide-tag { font-size: 0.7rem; padding: 0.4rem 0.85rem; margin-bottom: 0.5rem; }
   .banner-slide-title { font-size: clamp(2.5rem, 11vw, 3.5rem); margin-bottom: 0.5rem; }
   .banner-slide-desc { font-size: 0.95rem; line-height: 1.65; max-width: 100%; }
-  /* Arrows: keep visible and not overlapping content */
-  .banner-arrow { width: 44px; height: 44px; }
-  .prev-arrow { left: 0.5rem; }
-  .next-arrow { right: 0.5rem; }
-  .banner-dots { bottom: 1rem; }
 }
 
 @media (max-width: 400px) {
