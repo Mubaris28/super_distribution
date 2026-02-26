@@ -2584,7 +2584,7 @@ a.product-card-link:hover::after {
   .products-grid { grid-template-columns: 1fr; }
   /* THE COLLECTION: extra small mobile — card, left, right, img */
   .collection-inner { padding-left: 1rem; padding-right: 1rem; }
-  .coll-new-card { min-height: 360px; flex-direction: column; }
+  .coll-new-card { min-height: 500px; flex-direction: column; }
   .coll-new-left { padding: 1rem 1rem 0.6rem; }
   .coll-new-cat { font-size: 0.55rem; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
   .coll-new-title { font-size: clamp(1.05rem, 4.5vw, 1.25rem); margin-bottom: 0.4rem; }
