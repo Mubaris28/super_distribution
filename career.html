@@ -288,6 +288,18 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/nav.js"></script>
   <script>
+    (function careerHeroAnimation() {
+      var hero = document.querySelector('.career-hero');
+      if (!hero || typeof gsap === 'undefined') return;
+      var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      tl.from(hero.querySelector('.ch-title'), { duration: 0.85, y: 48, opacity: 0 })
+        .from(hero.querySelector('.ch-subtitle'), { duration: 0.7, y: 32, opacity: 0 }, '-=0.55')
+        .from(hero.querySelectorAll('.ch-jobs-list li'), { duration: 0.5, x: -24, opacity: 0, stagger: 0.12 }, '-=0.4')
+        .from(hero.querySelector('.ch-exp'), { duration: 0.5, y: 16, opacity: 0 }, '-=0.25')
+        .from(hero.querySelector('.ch-cta-row'), { duration: 0.6, y: 24, opacity: 0 }, '-=0.2')
+        .from(hero.querySelector('.ch-resume-note'), { duration: 0.5, opacity: 0 }, '-=0.15')
+        .from(hero.querySelector('.ch-poster-img'), { duration: 0.9, x: 60, opacity: 0, ease: 'power2.out' }, '-=1.1');
+    })();
     var careerForm = document.getElementById('careerForm');
     if (careerForm) {
       careerForm.addEventListener('submit', function(e) {
