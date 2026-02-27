@@ -125,6 +125,41 @@ body { background: var(--off-white); }
   box-shadow: 0 12px 36px rgba(232,23,27,0.4);
 }
 
+/* Compostable — Ethically Made intro + features image */
+.cat-page-bio-intro {
+  padding: 2.5rem 2rem 3rem;
+  background: var(--white);
+  border-bottom: 1px solid var(--light-gray);
+}
+.cat-page-bio-intro .cat-page-inner {
+  display: block;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.cat-bio-intro-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 1rem;
+}
+.cat-bio-intro-title em { font-style: normal; color: var(--red); }
+.cat-bio-intro-text {
+  font-size: 1rem;
+  color: var(--gray);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+.cat-bio-features-img-wrap {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+.cat-bio-features-img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
 /* Category products section — products after hero, unified gradient bg */
 .cat-page-products {
   padding: 4rem 2rem 5rem;

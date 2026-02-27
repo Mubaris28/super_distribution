@@ -31,15 +31,26 @@
     });
   }
 
+  function collapseAllMobileSubs() {
+    document.querySelectorAll('.mm-sub.open').forEach(function(ul) { ul.classList.remove('open'); });
+    document.querySelectorAll('.mm-chevron').forEach(function(chev) { chev.style.transform = ''; });
+  }
+
   function initMobileSubmenu() {
+    var menuClose = document.getElementById('menuClose');
+    var menuOverlay = document.getElementById('menuOverlay');
+    if (menuClose) menuClose.addEventListener('click', collapseAllMobileSubs);
+    if (menuOverlay) menuOverlay.addEventListener('click', collapseAllMobileSubs);
+
     document.querySelectorAll('.mm-has-sub .mm-parent').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         var sub = btn.nextElementSibling;
         var chev = btn.querySelector('.mm-chevron');
-        if (sub) sub.classList.toggle('open');
-        if (chev) chev.style.transform = sub && sub.classList.contains('open') ? 'rotate(180deg)' : '';
+        if (!sub || !sub.classList.contains('mm-sub')) return;
+        sub.classList.toggle('open');
+        if (chev) chev.style.transform = sub.classList.contains('open') ? 'rotate(180deg)' : '';
       });
     });
   }

@@ -14,6 +14,9 @@ body { background: var(--white); }
   overflow: hidden;
   padding-top:0px;
 }
+@media (max-width: 768px) {
+  .clients-hero { overflow: visible; }
+}
 .clients-hero::before {
   content: '';
   position: absolute;
@@ -518,9 +521,16 @@ body { background: var(--white); }
 }
 .wwwork-flag {
   font-size: 2.2rem;
-  color: var(--white);
+  color: var(--dark);
   margin-bottom: 0.9rem;
   line-height: 1;
+  min-height: 1.2em;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+.wwwork-featured .wwwork-flag {
+  color: rgba(255,255,255,0.95);
 }
 .wwwork-role {
   font-size: 0.7rem;
@@ -692,8 +702,9 @@ body { background: var(--white); }
 @media (max-width: 768px) {
   .clients-hero { min-height: auto; padding-top: 100px; padding-bottom: 3rem; }
   .clients-hero-inner { padding: 3rem 1.25rem; gap: 1.5rem; }
-  .clients-map-wrap { height: 280px; min-height: 220px; }
+  .clients-map-wrap { height: 280px; min-height: 220px; touch-action: pan-y; }
   .clients-map-section { padding: 3rem 1.25rem; }
+  #clients-map-global-reach { touch-action: pan-y; }
   .clients-map-section-inner { padding: 0 0.5rem; }
   #clients-map-global-reach { height: 380px; min-height: 260px; }
   .clients-wwwork { padding: 3rem 1.25rem; }
