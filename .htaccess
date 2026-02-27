@@ -1,10 +1,13 @@
-# Super Distribution - Apache config
-# Use this for our website (PHP forms + static HTML).
-# URLs work without .html (e.g. /contact, /about) after upload.
+# Super Distribution - Apache config (Hostinger)
+# Use for static HTML + optional PHP forms.
+# URLs work without .html (e.g. /contact, /about). Upload to site root (public_html).
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Favicon: serve 32px PNG when browser requests /favicon.ico
+  RewriteRule ^favicon\.ico$ assets/images/favicon/SD%20LOGO%2032px-01.png [L,NC]
 
   # Remove .html from browser: redirect /page.html -> /page (301)
   RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
@@ -35,7 +38,7 @@
   Options -Indexes
 </IfModule>
 
-# Optional: force HTTPS (uncomment when using SSL)
+# Force HTTPS — uncomment after enabling SSL in Hostinger panel
 # <IfModule mod_rewrite.c>
 #   RewriteCond %{HTTPS} off
 #   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

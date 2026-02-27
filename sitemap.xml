@@ -23,6 +23,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://superdistribution.mu/clients.html</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://superdistribution.mu/career.html</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://superdistribution.mu/products.html</loc>
     <lastmod>2026-02-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -71,6 +83,20 @@
     <priority>0.3</priority>
   </url>
 
+  <!-- Career job pages -->
+  <url>
+    <loc>https://superdistribution.mu/career-job-salesman.html</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://superdistribution.mu/career-job-driver.html</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Product inner pages — UJALA -->
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-ujala-whitener-2l.html</loc>
@@ -80,16 +106,19 @@
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-ujala-powder.html</loc>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-ujala-laundry-soap.html</loc>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-ujala-detergent-soap.html</loc>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
