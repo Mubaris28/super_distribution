@@ -131,7 +131,10 @@ function closeMenu() {
 if (hamburger)   hamburger.addEventListener('click', openMenu);
 if (menuClose)   menuClose.addEventListener('click', closeMenu);
 if (menuOverlay) menuOverlay.addEventListener('click', closeMenu);
-document.querySelectorAll('.mm-link').forEach(link => link.addEventListener('click', closeMenu));
+document.querySelectorAll('.mm-link').forEach(link => link.addEventListener('click', function(e) {
+  if (e.currentTarget.classList.contains('mm-parent')) return; /* Products: toggle submenu in nav.js, don't close */
+  closeMenu();
+}));
 
 /* =========================================
    SEARCH OVERLAY (navbar search icon) — all pages
