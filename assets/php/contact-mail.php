@@ -7,18 +7,20 @@
 
 declare(strict_types=1);
 
+ob_start();
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    ob_end_clean();
     http_response_code(204);
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
+    ob_end_clean();
     echo json_encode(['success' => false, 'message' => 'Method not allowed.']);
     exit;
 }
@@ -27,6 +29,7 @@ require_once __DIR__ . '/SecurityUtil.php';
 require_once __DIR__ . '/security-config.php';
 
 if (!SecurityUtil::checkOrigin()) {
+    ob_end_clean();
     http_response_code(403);
     echo json_encode(['success' => false, 'message' => 'Request origin not allowed.']);
     exit;
@@ -34,6 +37,7 @@ if (!SecurityUtil::checkOrigin()) {
 
 $clientIp = SecurityUtil::getClientIP();
 if (!SecurityUtil::checkRateLimit($clientIp)) {
+    ob_end_clean();
     http_response_code(429);
     echo json_encode(['success' => false, 'message' => 'Too many submissions. Please try again later.']);
     exit;
@@ -42,6 +46,7 @@ if (!SecurityUtil::checkRateLimit($clientIp)) {
 /* ── Load PHPMailer ───────────────────────────────────────────── */
 $autoload = __DIR__ . '/../../vendor/autoload.php';
 if (!file_exists($autoload)) {
+    ob_end_clean();
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Server error: autoload not found.']);
     exit;
@@ -74,6 +79,7 @@ if (!$subject)                                             $errors[] = 'Subject 
 if (!$message)                                             $errors[] = 'Message is required.';
 
 if ($errors) {
+    ob_end_clean();
     http_response_code(422);
     echo json_encode(['success' => false, 'message' => implode(' ', $errors)]);
     exit;
@@ -289,12 +295,14 @@ try {
 
     SecurityUtil::logSubmission($clientIp, $email);
 
+    ob_end_clean();
     echo json_encode([
         'success' => true,
         'message' => 'Message sent! We will get back to you within one business day. A confirmation has been sent to your email.'
     ]);
 
 } catch (Exception $e) {
+    ob_end_clean();
     error_log('[SD contact] PHPMailer error: ' . $mail->ErrorInfo);
     http_response_code(500);
     echo json_encode([

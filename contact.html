@@ -412,7 +412,6 @@
       btn.innerHTML = '<span style="opacity:.7">Sending…</span>';
       btn.disabled = true;
 
-      // Build FormData
       const data = new FormData(form);
 
       try {
@@ -420,18 +419,27 @@
           method: 'POST',
           body: data
         });
-        const contentType = res.headers.get('Content-Type') || '';
-        if (!contentType.includes('application/json')) {
-          showFormError('Form could not be sent: the server is not running PHP. Use a PHP server to test (e.g. in project folder run: php -S 127.0.0.1:8000 then open http://127.0.0.1:8000/contact.html). Live Server (port 5500) does not run PHP.');
+        const contentType = (res.headers.get('Content-Type') || '').toLowerCase();
+        const isJson = contentType.indexOf('application/json') !== -1;
+        let json = null;
+        if (isJson) {
+          try {
+            json = await res.json();
+          } catch (_) {
+            json = null;
+          }
+        }
+        if (!isJson || json === null) {
+          showFormError(res.ok
+            ? 'The server did not respond correctly. Please try again or email us at orders@superdistribution.mu.'
+            : 'The form could not be sent. Make sure the site is running on a server with PHP (e.g. your live host or locally: php -S 127.0.0.1:8000).');
           btn.innerHTML = origHTML;
           btn.disabled = false;
           return;
         }
-        const json = await res.json();
-
         if (json.success) {
           const nameEl = document.getElementById('successName');
-          if (nameEl) nameEl.textContent = form.querySelector('#firstName').value.trim();
+          if (nameEl) nameEl.textContent = (form.querySelector('#firstName') && form.querySelector('#firstName').value) ? form.querySelector('#firstName').value.trim() : '';
           formContent.style.display = 'none';
           formSuccess.style.display = 'block';
         } else {
@@ -440,7 +448,7 @@
           btn.disabled = false;
         }
       } catch (err) {
-        showFormError('Could not reach the server. Use a PHP server to test the form (e.g. php -S 127.0.0.1:8000). Live Server does not run PHP.');
+        showFormError('Could not reach the server. Check your connection or try again later. You can also email us at orders@superdistribution.mu.');
         btn.innerHTML = origHTML;
         btn.disabled = false;
       }

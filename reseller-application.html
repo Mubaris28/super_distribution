@@ -405,25 +405,44 @@
       var submitBtn = document.getElementById('resellerSubmitBtn');
       var serverErr = document.getElementById('resellerServerError');
       var successBlock = document.getElementById('resellerSuccess');
-      var submitBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+      if (!form || !submitBtn || !serverErr || !successBlock) return;
+      var submitBtnHtml = submitBtn.innerHTML;
 
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
+        if (!submitBtn || !serverErr || !successBlock) return;
         var serviceTypes = [].slice.call(document.querySelectorAll('input[name="serviceTypes[]"]:checked')).map(function(c) { return c.value; });
         if (serviceTypes.length === 0) {
+          serverErr.innerHTML = 'Please select at least one Service Type.';
           serverErr.style.display = 'block';
-          serverErr.textContent = 'Please select at least one Service Type.';
           return;
         }
         serverErr.style.display = 'none';
         serverErr.textContent = '';
+        serverErr.innerHTML = '';
         submitBtn.innerHTML = '<span style="opacity:.8">Sending…</span>';
         submitBtn.disabled = true;
 
         var data = new FormData(form);
+        var iconSvg = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;vertical-align:-2px;margin-right:6px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
         try {
           var res = await fetch('assets/php/reseller-mail.php', { method: 'POST', body: data });
-          var json = await res.json();
+          var contentType = (res.headers.get('Content-Type') || '').toLowerCase();
+          var isJson = contentType.indexOf('application/json') !== -1;
+          var json = null;
+          if (isJson) {
+            try {
+              json = await res.json();
+            } catch (_) { json = null; }
+          }
+          if (!isJson || json === null) {
+            serverErr.innerHTML = iconSvg + (res.ok ? 'The server did not respond correctly. Please try again or email us at orders@superdistribution.mu.' : 'The form could not be sent. Ensure the site is running on a server with PHP.');
+            serverErr.style.display = 'flex';
+            serverErr.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            submitBtn.innerHTML = submitBtnHtml;
+            submitBtn.disabled = false;
+            return;
+          }
           if (json.success) {
             var nameEl = document.getElementById('resellerSuccessName');
             if (nameEl) {
@@ -434,14 +453,14 @@
             successBlock.style.display = 'block';
             successBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
           } else {
-            serverErr.innerHTML = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;vertical-align:-2px;margin-right:6px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' + (json.message || 'Something went wrong. Please try again.');
+            serverErr.innerHTML = iconSvg + (json.message || 'Something went wrong. Please try again.');
             serverErr.style.display = 'flex';
             serverErr.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             submitBtn.innerHTML = submitBtnHtml;
             submitBtn.disabled = false;
           }
         } catch (err) {
-          serverErr.innerHTML = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;vertical-align:-2px;margin-right:6px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Network error. Please email us at orders@superdistribution.mu';
+          serverErr.innerHTML = iconSvg + 'Network error. Please check your connection or email us at orders@superdistribution.mu';
           serverErr.style.display = 'flex';
           serverErr.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           submitBtn.innerHTML = submitBtnHtml;
