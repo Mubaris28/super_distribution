@@ -6,8 +6,11 @@
   RewriteEngine On
   RewriteBase /
 
-  # Favicon: serve 32px PNG when browser requests /favicon.ico
-  RewriteRule ^favicon\.ico$ assets/images/favicon/SD%20LOGO%2032px-01.png [L,NC]
+  # Favicon: optional rewrite if favicon.ico missing; root favicon.ico preferred for Google
+  RewriteRule ^favicon\.ico$ assets/images/favicon/sd-logo-32.png [L,NC]
+
+  # Homepage: redirect /index and /index.html to root so URL bar never shows "index"
+  RewriteRule ^index\.html?$ / [R=301,L]
 
   # Remove .html from browser: redirect /page.html -> /page (301)
   RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]

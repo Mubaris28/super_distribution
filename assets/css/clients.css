@@ -465,110 +465,6 @@ body { background: var(--white); }
   max-height: 280px;
 }
 
-/* ---- WHERE WE WORK — enhanced ---- */
-.clients-wwwork {
-  padding: 5rem 2rem;
-  background: var(--off-white);
-}
-.clients-wwwork-inner { max-width: 1200px; margin: 0 auto; }
-.clients-wwwork-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-.clients-wwwork-header h2 {
-  font-family: var(--font-head);
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  font-weight: 900;
-  color: var(--dark);
-  letter-spacing: -0.02em;
-  margin-bottom: 0.4rem;
-}
-.clients-wwwork-header h2 em { font-style: normal; color: var(--red); }
-.clients-wwwork-header p { color: var(--gray); font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
-.wwwork-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-}
-.wwwork-card {
-  background: white;
-  border-radius: var(--radius-xl);
-  border: 1.5px solid var(--light-gray);
-  overflow: hidden;
-  position: relative;
-  padding: 1.75rem;
-  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-}
-.wwwork-card:hover {
-  border-color: var(--red);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
-}
-.wwwork-featured {
-  grid-column: span 2;
-  background: linear-gradient(135deg, #0d1117 0%, #1a0a0a 45%, #8b0000 100%);
-  border-color: rgba(232,23,27,0.5);
-}
-.wwwork-featured .wwwork-country { color: white; }
-.wwwork-featured .wwwork-role { color: rgba(255,180,180,0.95); }
-.wwwork-featured .wwwork-desc { color: rgba(255,255,255,0.7); }
-.wwwork-featured .wwwork-tags span { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2); }
-.wwwork-card-accent {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-}
-.wwwork-flag {
-  font-size: 2.2rem;
-  color: var(--dark);
-  margin-bottom: 0.9rem;
-  line-height: 1;
-  min-height: 1.2em;
-  display: block;
-  position: relative;
-  z-index: 1;
-}
-.wwwork-featured .wwwork-flag {
-  color: rgba(255,255,255,0.95);
-}
-.wwwork-role {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 0.25rem;
-}
-.wwwork-country {
-  font-family: var(--font-head);
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--dark);
-  margin-bottom: 0.65rem;
-  letter-spacing: -0.01em;
-}
-.wwwork-desc {
-  font-size: 0.88rem;
-  color: var(--gray);
-  line-height: 1.7;
-  margin-bottom: 0.9rem;
-}
-.wwwork-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-.wwwork-tags span {
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 0.22rem 0.65rem;
-  border-radius: 9999px;
-  background: var(--off-white);
-  border: 1px solid var(--light-gray);
-  color: var(--gray);
-}
-
 /* ---- PARTNER BRAND LOGOS ---- */
 .clients-brands-section {
   padding: 4rem 2rem;
@@ -695,8 +591,6 @@ body { background: var(--white); }
   .clients-stat:nth-child(2n) { border-right: none; }
 }
 @media (max-width: 1024px) {
-  .wwwork-grid { grid-template-columns: 1fr 1fr; }
-  .wwwork-featured { grid-column: span 2; }
   .clients-brands-logos { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 768px) {
@@ -707,9 +601,6 @@ body { background: var(--white); }
   #clients-map-global-reach { touch-action: pan-y; }
   .clients-map-section-inner { padding: 0 0.5rem; }
   #clients-map-global-reach { height: 380px; min-height: 260px; }
-  .clients-wwwork { padding: 3rem 1.25rem; }
-  .wwwork-grid { grid-template-columns: 1fr; }
-  .wwwork-featured { grid-column: span 1; }
   .clients-brands-logos { grid-template-columns: repeat(3, 1fr); }
   .clients-stats-strip { padding: 2.5rem 1.25rem; }
   .clients-stats-inner { grid-template-columns: 1fr 1fr; }

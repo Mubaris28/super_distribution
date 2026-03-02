@@ -1173,12 +1173,15 @@ body.search-overlay-open #header {
 
 /* btn-outline-red removed */
 
-/* Product filter tabs */
+/* Product filter tabs (homepage: must be clickable, above any overlay) */
 .prod-filter-tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
   margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
 }
 
 .prod-tab {
@@ -1193,6 +1196,9 @@ body.search-overlay-open #header {
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.25s;
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
 }
 
 .prod-tab:hover {
@@ -2033,10 +2039,13 @@ a.product-card-link:hover::after {
 .pgd-item:hover {
   background: transparent;
 }
-.pgd-item:hover .partner-logo {
+.pgd-item:hover .partner-logo:not(.partner-logo-no-filter) {
   transform: scale(1.1);
   filter: brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,0.35));
   opacity: 1;
+}
+.pgd-item:hover .partner-logo.partner-logo-no-filter {
+  transform: scale(1.1);
 }
 
 .pgd-item span {
@@ -2045,7 +2054,10 @@ a.product-card-link:hover::after {
   text-align: center;
 }
 
-/* White logos on brand-red bg */
+/* White logos on brand-red bg (T-SHINE and others with .partner-logo-no-filter keep original colours) */
+.pgd-item .partner-logo:not(.partner-logo-no-filter) {
+  filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(0,0,0,0.25));
+}
 .pgd-item .partner-logo {
   max-height: 220px;
   height: auto;
@@ -2053,7 +2065,6 @@ a.product-card-link:hover::after {
   max-width: 220px;
   min-height: 56px;
   object-fit: contain;
-  filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(0,0,0,0.25));
   opacity: 1;
   transition: transform 0.3s var(--ease-back), opacity 0.3s ease;
 }
@@ -2852,7 +2863,7 @@ a.product-card-link:hover::after {
   top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%) translateY(-6px);
-  min-width: 190px;
+  min-width: 260px;
   background: var(--white);
   border-radius: 14px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.06);

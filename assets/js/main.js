@@ -149,14 +149,14 @@ document.querySelectorAll('.mm-link').forEach(link => link.addEventListener('cli
   const productsUrl = base + 'products.html';
 
   const products = [
-    { name: 'UJALA Whitener 2L',          cat: 'Household',    img: base + 'assets/images/products/ujala/ujala_whitener_2L.png',                         href: base + 'products-innerpage/product-ujala-whitener-2l.html' },
+    { name: 'UJALA Liquid Detergent 2L',          cat: 'Household',    img: base + 'assets/images/products/ujala/ujala_whitener_2L.png',                         href: base + 'products-innerpage/product-ujala-whitener-2l.html' },
     { name: 'UJALA Powder 1kg & 500g',    cat: 'Household',    img: base + 'assets/images/products/ujala/Ujala_powder.png',                              href: base + 'products-innerpage/product-ujala-powder.html' },
     { name: 'UJALA Laundry Soap 150g',    cat: 'Household',    img: base + 'assets/images/products/ujala/Ujala_laudary_ soap.png',                       href: base + 'products-innerpage/product-ujala-laundry-soap.html' },
     { name: 'UJALA Detergent Soap 110g',  cat: 'Household',    img: base + 'assets/images/products/ujala/Ujala_Instant_Dissolver_soap.png',              href: base + 'products-innerpage/product-ujala-detergent-soap.html' },
     { name: 'MARGO Soap',                 cat: 'Household',    img: base + 'assets/images/products/margo_soap/Margo.png',                                href: base + 'products-innerpage/product-margo-soap.html' },
     { name: 'Neem Toothpaste',            cat: 'Household',    img: base + 'assets/images/products/Neem_toothpaste/Neem_toothpaste_packshot.png',        href: base + 'products-innerpage/product-neem-toothpaste.html' },
     { name: 'Super Napkin',               cat: 'Household',    img: base + 'assets/images/products/Napkin/napkin.png',                                   href: base + 'products-innerpage/product-super-napkin.html' },
-    { name: 'Maya Incense Sticks',        cat: 'Household',    img: base + 'assets/images/products/maya/Maya_Sandal_Big.png',                            href: base + 'products-innerpage/product-maya-incense.html' },
+    { name: 'Maya Incense Sticks',        cat: 'Religious',    img: base + 'assets/images/products/maya/Maya_Sandal_Big.png',                            href: base + 'products-innerpage/product-maya-incense.html' },
     { name: 'Super Bio Wooden Spoon',     cat: 'Compostable',  img: base + 'assets/images/products/super_bio/Spoon.png',                                 href: base + 'products-innerpage/product-super-bio-wooden-spoon.html' },
     { name: 'Super Bio Wooden Fork',      cat: 'Compostable',  img: base + 'assets/images/products/super_bio/Fork  packshot.png',                       href: base + 'products-innerpage/product-super-bio-wooden-fork.html' },
     { name: 'Super Bio Wooden Knife',     cat: 'Compostable',  img: base + 'assets/images/products/super_bio/Knife packshot.png',                       href: base + 'products-innerpage/product-super-bio-wooden-knife.html' },
@@ -665,51 +665,80 @@ scrollReveal('.footer-inner', { y: 30, duration: 0.6 });
   });
 })();
 
-// Product category filter tabs (homepage: show only first 8 matching products per tab)
+// Homepage: product tabs + grid animation (run together so filter and GSAP don't conflict)
 (function() {
-  const tabs = document.querySelectorAll('.prod-tab');
-  const grid = document.getElementById('productsGrid');
-  if (!tabs.length || !grid) return;
+  function run() {
+    var tabsWrap = document.getElementById('prodFilterTabs');
+    var grid = document.getElementById('productsGrid');
+    // #region agent log
+    fetch('http://127.0.0.1:7245/ingest/98aa9fc5-cf75-4ae1-a6d9-2bf518924633',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'main.js:home-tabs-run',message:'home tab init',data:{hasTabsWrap:!!tabsWrap,hasGrid:!!grid},timestamp:Date.now(),hypothesisId:'H1'})}).catch(function(){});
+    // #endregion
+    if (!tabsWrap || !grid) return;
 
-  function getItemCategory(item) {
-    const card = item.classList.contains('product-card') ? item : item.querySelector('.product-card');
-    return card ? (card.dataset.cat || '') : '';
-  }
+    var cards = grid.querySelectorAll('.product-card');
+    if (!cards.length) return;
 
-  function applyFilter(cat) {
-    const items = Array.from(grid.children);
-    items.forEach(item => item.classList.add('hidden'));
-    const matching = items.filter(item => cat === 'all' || getItemCategory(item) === cat);
-    matching.slice(0, 8).forEach(item => item.classList.remove('hidden'));
-  }
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      applyFilter(tab.dataset.cat);
-    });
-  });
-
-  applyFilter('all');
-})();
-
-// Product cards — entrance animation only (home page #productsGrid)
-(function() {
-  var grid = document.getElementById('productsGrid');
-  if (!grid) return;
-  var cards = grid.querySelectorAll('.product-card');
-  if (!cards.length) return;
-
-  gsap.set(cards, { y: 50, opacity: 0, scale: 0.96 });
-  ScrollTrigger.create({
-    trigger: grid,
-    start: 'top 82%',
-    once: true,
-    onEnter: function() {
-      gsap.to(cards, { y: 0, opacity: 1, scale: 1, duration: 0.55, ease: 'back.out(1.2)', stagger: 0.07 });
+    function getItemCategory(item) {
+      var card = item.classList.contains('product-card') ? item : item.querySelector('.product-card');
+      return card ? (card.getAttribute('data-cat') || '') : '';
     }
-  });
+
+    var currentCat = 'all';
+    function applyFilter(cat) {
+      currentCat = cat;
+      var tabs = tabsWrap.querySelectorAll('.prod-tab');
+      var items = Array.from(grid.children);
+      tabs.forEach(function(t) { t.classList.toggle('active', t.getAttribute('data-cat') === cat); });
+      var matching = items.filter(function(item) { return cat === 'all' || getItemCategory(item) === cat; });
+      items.forEach(function(item) { item.classList.add('hidden'); });
+      var toShow = matching.slice(0, 8);
+      // #region agent log
+      fetch('http://127.0.0.1:7245/ingest/98aa9fc5-cf75-4ae1-a6d9-2bf518924633',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'main.js:applyFilter',message:'home applyFilter',data:{cat:cat,matchingLen:matching.length,toShowLen:toShow.length},timestamp:Date.now(),hypothesisId:'H3'})}).catch(function(){});
+      // #endregion
+      toShow.forEach(function(item) { item.classList.remove('hidden'); });
+      toShow.forEach(function(item) {
+        var card = item.classList.contains('product-card') ? item : item.querySelector('.product-card');
+        if (card) {
+          card.style.opacity = '1';
+          card.style.transform = '';
+          if (typeof gsap !== 'undefined' && gsap.set) gsap.set(card, { opacity: 1, y: 0, scale: 1 });
+        }
+      });
+    }
+
+    // Click on tabs (use capture so we get the event first)
+    tabsWrap.addEventListener('click', function(e) {
+      var tab = e.target.closest('.prod-tab');
+      if (!tab) return;
+      e.preventDefault();
+      e.stopPropagation();
+      var cat = tab.getAttribute('data-cat');
+      if (!cat) return;
+      applyFilter(cat);
+    }, true);
+
+    applyFilter('all');
+
+    // GSAP: hide all cards initially, reveal on scroll; then re-apply filter so visible 8 stay visible
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.set(cards, { y: 50, opacity: 0, scale: 0.96 });
+      ScrollTrigger.create({
+        trigger: grid,
+        start: 'top 82%',
+        once: true,
+        onEnter: function() {
+          gsap.to(cards, { y: 0, opacity: 1, scale: 1, duration: 0.55, ease: 'back.out(1.2)', stagger: 0.07 });
+        }
+      });
+      applyFilter(currentCat);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
 })();
 
 // Stats counters

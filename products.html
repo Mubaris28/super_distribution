@@ -9,20 +9,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/products.css">
-  <meta name="description" content="Full product catalogue: UJALA whitener &amp; powder, MARGO soap, Neem toothpaste, Maya Incense, Super Bio compostables. Wholesale &amp; retail across Mauritius. Super Distribution Ltd.">
+  <meta name="description" content="Full product catalogue: UJALA, The Super Value household range, Super Napkin, MARGO Soap 125g, Neem Toothpaste 200g, Maya Incense, Super Bio compostables. Wholesale &amp; retail across Mauritius. Super Distribution Ltd.">
   <link rel="canonical" href="https://superdistribution.mu/products.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Products – Super Distribution Mauritius">
-  <meta property="og:description" content="Browse the full Super Distribution product range – UJALA fabric care, MARGO soap, Neem toothpaste, Maya incense, Super Bio compostable ware and more. Available wholesale and retail.">
+  <meta property="og:description" content="Browse the full Super Distribution product range – UJALA, The Super Value, MARGO Soap 125g, Neem Toothpaste 200g, Maya incense, Super Bio and more. Available wholesale and retail.">
   <meta property="og:url" content="https://superdistribution.mu/products.html">
   <meta property="og:image" content="https://superdistribution.mu/assets/images/logo/SD_LOGO-01.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Products – Super Distribution Mauritius">
-  <meta name="twitter:description" content="Browse the full Super Distribution product range – UJALA fabric care, MARGO soap, Neem toothpaste, Maya incense, Super Bio compostable ware and more. Available wholesale and retail.">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/SD%20LOGO%2016px-01.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/SD%20LOGO%2032px-01.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="assets/images/favicon/SD%20LOGO%2048px-01.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/SD%20LOGO%20180px-01.png">
+  <meta name="twitter:description" content="Browse the full Super Distribution product range – UJALA, The Super Value, MARGO Soap 125g, Neem Toothpaste 200g, Maya incense, Super Bio and more. Available wholesale and retail.">  <link rel="icon" href="/favicon.ico" sizes="32x32">
+
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/sd-logo-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/sd-logo-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/images/favicon/sd-logo-48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/sd-logo-180.png">
 
 </head>
 <body>
@@ -48,6 +49,7 @@
         <li class="has-dropdown" id="productsDropdown">
           <a href="products.html" class="nav-link active">Products <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
           <ul class="nav-dropdown">
+            <li><a href="products.html">All Products</a></li>
             <li><a href="household.html">Household</a></li>
             <li><a href="compostable.html">Compostable</a></li>
             <li><a href="cosmetic.html">Cosmetic</a></li>
@@ -87,39 +89,67 @@
   <section class="products-page-section">
     <div class="products-page-inner">
 
-      <!-- Category filter cards -->
-      <div class="cat-cards-row" id="catCardsRow">
-        <button class="cat-card active" data-cat="all">
-          <span class="cat-card-icon">🛒</span> All Products <span class="cat-card-count" id="countAll">30</span>
-        </button>
-        <button class="cat-card" data-cat="household">
-          <span class="cat-card-icon">🏠</span> Household <span class="cat-card-count" id="countHousehold">8</span>
-        </button>
-        <button class="cat-card" data-cat="compostable">
-          <span class="cat-card-icon">🌿</span> Compostable <span class="cat-card-count" id="countCompostable">17</span>
-        </button>
-        <button class="cat-card" data-cat="cosmetic">
-          <span class="cat-card-icon">💄</span> Cosmetic <span class="cat-card-count" id="countCosmetic">0</span>
-        </button>
-        <button class="cat-card" data-cat="religious">
-          <span class="cat-card-icon">🪔</span> Religious <span class="cat-card-count" id="countReligious">0</span>
-        </button>
-        <button class="cat-card" data-cat="Stationery">
-          <span class="cat-card-icon">✏️</span> Stationery <span class="cat-card-count" id="countStationary">0</span>
-        </button>
+      <!-- Category tabs -->
+      <div class="products-tabs" id="productsTabs" role="tablist" aria-label="Product category">
+        <button type="button" class="products-tab active" role="tab" data-cat="all" aria-selected="true">All Products</button>
+        <button type="button" class="products-tab" role="tab" data-cat="household">Household</button>
+        <button type="button" class="products-tab" role="tab" data-cat="compostable">Compostable</button>
+        <button type="button" class="products-tab" role="tab" data-cat="cosmetic">Cosmetic</button>
+        <button type="button" class="products-tab" role="tab" data-cat="religious">Religious</button>
+        <button type="button" class="products-tab" role="tab" data-cat="stationary">Stationery</button>
       </div>
+      <script>
+      (function() {
+        var tabsEl = document.getElementById('productsTabs');
+        var section = document.querySelector('.products-page-section');
+        if (!tabsEl || !section) return;
+        function selectCategory(cat) {
+          var tabs = tabsEl.querySelectorAll('.products-tab');
+          var groups = section.querySelectorAll('.prod-group');
+          for (var i = 0; i < tabs.length; i++) {
+            var t = tabs[i];
+            t.classList.toggle('active', t.getAttribute('data-cat') === cat);
+            t.setAttribute('aria-selected', t.getAttribute('data-cat') === cat ? 'true' : 'false');
+          }
+          for (var j = 0; j < groups.length; j++) {
+            var g = groups[j];
+            g.style.display = (cat === 'all' || g.getAttribute('data-group') === cat) ? '' : 'none';
+          }
+          var cardsToShow = cat === 'all' ? section.querySelectorAll('.product-card') : section.querySelectorAll('.prod-group[data-group="' + cat + '"] .product-card');
+          for (var k = 0; k < cardsToShow.length; k++) {
+            var el = cardsToShow[k];
+            el.style.opacity = '1';
+            el.style.transform = '';
+            if (typeof gsap !== 'undefined' && gsap.set) gsap.set(el, { opacity: 1, y: 0, scale: 1 });
+          }
+          if (typeof gsap !== 'undefined' && gsap.to) gsap.to(cardsToShow, { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.04, ease: 'power2.out' });
+          if (cat !== 'all') {
+            var target = section.querySelector('.prod-group[data-group="' + cat + '"]');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+        tabsEl.addEventListener('click', function(e) {
+          var tab = e.target.closest('.products-tab');
+          if (!tab) return;
+          e.preventDefault();
+          var cat = tab.getAttribute('data-cat');
+          if (cat) selectCategory(cat);
+        });
+        window._productsSelectCategory = selectCategory;
+      })();
+      </script>
 
       <!-- ── HOUSEHOLD ── -->
       <div class="prod-group" data-group="household">
         <div class="prod-group-label">
           <span class="prod-group-label-text">🏠 Household</span>
           <div class="prod-group-label-line"></div>
-          <span class="prod-group-label-count">8 products</span>
+          <span class="prod-group-label-count">17 products</span>
         </div>
         <div class="products-grid">
           <a href="products-innerpage/product-ujala-whitener-2l.html" class="product-card-link"><div class="product-card" data-cat="household">
-            <div class="product-img-wrap"><div class="product-img p-img-1"><img src="assets/images/products/ujala/ujala_whitener_2L.png" alt="UJALA Whitener 2L" class="product-card-img" loading="lazy"></div></div>
-            <div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">UJALA Whitener 2L</span></div>
+            <div class="product-img-wrap"><div class="product-img p-img-1"><img src="assets/images/products/ujala/ujala_whitener_2L.png" alt="UJALA Liquid Detergent 2L" class="product-card-img" loading="lazy"></div></div>
+            <div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">UJALA Liquid Detergent 2L</span></div>
           </div></a>
           <a href="products-innerpage/product-ujala-powder.html" class="product-card-link"><div class="product-card" data-cat="household">
             <div class="product-img-wrap"><div class="product-img p-img-ujala-pow"><img src="assets/images/products/ujala/Ujala_powder.png" alt="UJALA Powder" class="product-card-img" loading="lazy"></div></div>
@@ -133,10 +163,20 @@
             <div class="product-img-wrap"><div class="product-img p-img-det"><img src="assets/images/products/ujala/Ujala_Instant_Dissolver_soap.png" alt="UJALA Detergent Soap" class="product-card-img" loading="lazy"></div></div>
             <div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">UJALA Detergent Soap 110g</span></div>
           </div></a>
-          <a href="products-innerpage/product-margo-soap.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img p-img-margo"><img src="assets/images/products/margo_soap/Margo.png" alt="MARGO Soap" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">MARGO Soap</span></div></div></a>
-          <a href="products-innerpage/product-neem-toothpaste.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img p-img-neem"><img src="assets/images/products/Neem_toothpaste/Neem_toothpaste_packshot.png" alt="Neem Toothpaste" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">Neem Toothpaste</span></div></div></a>
           <a href="products-innerpage/product-super-napkin.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img p-img-napkin"><img src="assets/images/products/Napkin/napkin.png" alt="Super Napkin" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">Super Napkin</span></div></div></a>
-          <a href="products-innerpage/product-maya-incense.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img p-img-maya"><img src="assets/images/products/maya/Maya_Sandal_Big.png" alt="Maya Incense Sticks (Small &amp; Large 8u)" class="product-card-img product-card-img-default" loading="lazy"><img src="assets/images/products/maya/Maya_Sandal_SAMLL.png" alt="Maya Incense Sticks Small pack" class="product-card-img product-card-img-hover" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">Maya Incense Sticks (Small &amp; Large 8u)</span></div></div></a>
+          <!-- The Super Value -->
+          <a href="contact.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img"><img src="assets/images/products/super_value/laundry-3l.png" alt="The Super Value Laundry 3L" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">The Super Value Laundry 3L</span></div></div></a>
+          <a href="contact.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img"><img src="assets/images/products/super_value/dishwashing-5l.png" alt="The Super Value Dishwashing 5L" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">The Super Value Dishwashing 5L &amp; 750ml</span></div></div></a>
+          <a href="contact.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img"><img src="assets/images/products/super_value/handwash-500ml.png" alt="The Super Value Handwash 500ml" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">The Super Value Handwash 500ml</span></div></div></a>
+          <a href="contact.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img"><img src="assets/images/products/super_value/sponge-scourer.png" alt="The Super Value Sponge Scourer x 10" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">The Super Value Sponge Scourer × 10</span></div></div></a>
+          <a href="contact.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img"><img src="assets/images/products/super_value/steel-scrubber.png" alt="The Super Value Steel Scrubber x 1" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">The Super Value Steel Scrubber × 1</span></div></div></a>
+          <a href="contact.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img"><img src="assets/images/products/super_value/scouring-pads.png" alt="The Super Value Scouring Pads x 10" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">The Super Value Scouring Pads × 10</span></div></div></a>
+          <a href="contact.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img"><img src="assets/images/products/super_value/dishwashing-paste.png" alt="The Super Value Dishwashing paste 400g" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">The Super Value Dishwashing paste 400g</span></div></div></a>
+          <a href="contact.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img"><img src="assets/images/products/super_value/no-dust-broom.png" alt="The Super Value No Dust Broom" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">The Super Value No Dust Broom</span></div></div></a>
+          <a href="contact.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img"><img src="assets/images/products/super_value/toilet-block.png" alt="The Super Value Toilet Block" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">The Super Value Toilet Block × 1pcs &amp; 2pcs</span></div></div></a>
+          <a href="contact.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img"><img src="assets/images/products/super_value/pocket-air-freshener.png" alt="The Super Value Pocket Air freshener 10g" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">The Super Value Pocket Air freshener 10g</span></div></div></a>
+          <a href="contact.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img"><img src="assets/images/products/super_value/metallic-pads.png" alt="The Super Value Metallic Pads x 4" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">The Super Value Metallic Pads × 4</span></div></div></a>
+          <a href="contact.html" class="product-card-link"><div class="product-card" data-cat="household"><div class="product-img-wrap"><div class="product-img"><img src="assets/images/products/super_value/sponge-cloth.png" alt="The Super Value Sponge Cloth x 3" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Household</span><span class="pcl-name">The Super Value Sponge Cloth × 3</span></div></div></a>
         </div>
       </div>
 
@@ -181,29 +221,28 @@
         </div>
       </div>
 
-      <!-- ── COSMETIC (empty — products moved to Household) ── -->
+      <!-- ── COSMETIC ── -->
       <div class="prod-group" data-group="cosmetic">
         <div class="prod-group-label">
           <span class="prod-group-label-text">💄 Cosmetic</span>
           <div class="prod-group-label-line"></div>
-          <span class="prod-group-label-count">0 products</span>
+          <span class="prod-group-label-count">2 products</span>
         </div>
-        <div class="cat-page-empty-state prod-page-empty-state">
-          <p class="cat-page-empty-state-text">No products in this category yet. We are expanding our Religious Products soon. Contact us to register your interest.</p>
-          <a href="contact.html" class="cat-page-empty-state-cta">Contact Us</a>
+        <div class="products-grid">
+          <a href="products-innerpage/product-margo-soap.html" class="product-card-link"><div class="product-card" data-cat="cosmetic"><div class="product-img-wrap"><div class="product-img p-img-margo"><img src="assets/images/products/margo_soap/Margo.png" alt="MARGO Soap 125g" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Cosmetic</span><span class="pcl-name">MARGO Soap 125g</span></div></div></a>
+          <a href="products-innerpage/product-neem-toothpaste.html" class="product-card-link"><div class="product-card" data-cat="cosmetic"><div class="product-img-wrap"><div class="product-img p-img-neem"><img src="assets/images/products/Neem_toothpaste/Neem_toothpaste_packshot.png" alt="Neem Toothpaste 200g" class="product-card-img" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Cosmetic</span><span class="pcl-name">Neem Toothpaste 200g</span></div></div></a>
         </div>
       </div>
 
-      <!-- ── RELIGIOUS (empty — products moved to Household) ── -->
+      <!-- ── RELIGIOUS ── -->
       <div class="prod-group" data-group="religious">
         <div class="prod-group-label">
           <span class="prod-group-label-text">🪔 Religious</span>
           <div class="prod-group-label-line"></div>
-          <span class="prod-group-label-count">0 products</span>
+          <span class="prod-group-label-count">1 product</span>
         </div>
-        <div class="cat-page-empty-state prod-page-empty-state">
-          <p class="cat-page-empty-state-text">No products in this category yet. We are expanding our Religious Products soon. Contact us to register your interest.</p>
-          <a href="contact.html" class="cat-page-empty-state-cta">Contact Us</a>
+        <div class="products-grid">
+          <a href="products-innerpage/product-maya-incense.html" class="product-card-link"><div class="product-card" data-cat="religious"><div class="product-img-wrap"><div class="product-img p-img-maya"><img src="assets/images/products/maya/Maya_Sandal_Big.png" alt="Maya Incense Sticks (Small &amp; Large 8u)" class="product-card-img product-card-img-default" loading="lazy"><img src="assets/images/products/maya/Maya_Sandal_SAMLL.png" alt="Maya Incense Sticks Small pack" class="product-card-img product-card-img-hover" loading="lazy"></div></div><div class="product-card-label"><span class="pcl-cat">Religious</span><span class="pcl-name">Maya Incense Sticks (Small &amp; Large 8u)</span></div></div></a>
         </div>
       </div>
 
@@ -237,7 +276,7 @@
       <div class="footer-col">
         <h4>UJALA Range</h4>
         <ul>
-          <li><a href="products-innerpage/product-ujala-whitener-2l.html">Fabric Whitener 800ml &amp; 2L</a></li>
+          <li><a href="products-innerpage/product-ujala-whitener-2l.html">Liquid Detergent 800ml &amp; 2L</a></li>
           <li><a href="products-innerpage/product-ujala-powder.html">Powder 500g &amp; 1kg</a></li>
           <li><a href="products-innerpage/product-ujala-laundry-soap.html">Laundry Soap 150g</a></li>
           <li><a href="products-innerpage/product-ujala-detergent-soap.html">Detergent Soap 110g</a></li>
@@ -268,7 +307,7 @@
         <h4>Contact</h4>
         <ul>
           <li>📍 Royal Road Terre Rouge, Pamplemousses, Mauritius</li>
-          <li>📞 5286 6666</li>
+          <li>📞 52513078</li>
           <li>✉️ superdistributionltd@gmail.com</li>
           <li>🕐 Mon–Sat: 9:00 AM – 5:00 PM</li>
         </ul>
@@ -300,6 +339,7 @@
       <li class="mm-has-sub">
         <a href="products.html" class="mm-parent mm-link">Products <span class="mm-chevron" aria-hidden="true">▼</span></a>
         <ul class="mm-sub">
+          <li><a href="products.html" class="mm-link">All Products</a></li>
           <li><a href="household.html" class="mm-link">Household</a></li>
           <li><a href="compostable.html" class="mm-link">Compostable</a></li>
           <li><a href="cosmetic.html" class="mm-link">Cosmetic</a></li>
@@ -319,21 +359,23 @@
   <script src="assets/js/nav.js"></script>
   <script>
     // Navbar scroll
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 50);
-    });
+    var header = document.getElementById('header');
+    if (header) {
+      window.addEventListener('scroll', function() { header.classList.toggle('scrolled', window.scrollY > 50); });
+    }
 
     // Hamburger
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const menuOverlay = document.getElementById('menuOverlay');
-    const menuClose = document.getElementById('menuClose');
-    function openMenu() { mobileMenu.classList.add('open'); menuOverlay.classList.add('open'); }
-    function closeMenu() { mobileMenu.classList.remove('open'); menuOverlay.classList.remove('open'); }
-    hamburger.addEventListener('click', openMenu);
-    menuClose.addEventListener('click', closeMenu);
-    menuOverlay.addEventListener('click', closeMenu);
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobileMenu');
+    var menuOverlay = document.getElementById('menuOverlay');
+    var menuClose = document.getElementById('menuClose');
+    if (hamburger && mobileMenu && menuOverlay && menuClose) {
+      function openMenu() { mobileMenu.classList.add('open'); menuOverlay.classList.add('open'); }
+      function closeMenu() { mobileMenu.classList.remove('open'); menuOverlay.classList.remove('open'); }
+      hamburger.addEventListener('click', openMenu);
+      menuClose.addEventListener('click', closeMenu);
+      menuOverlay.addEventListener('click', closeMenu);
+    }
 
     // URL param filter
     const params = new URLSearchParams(window.location.search);
@@ -346,7 +388,7 @@
     const searchOverlayClose = document.getElementById('searchOverlayClose');
     const searchForm = document.getElementById('searchForm');
     const searchOverlayInput = document.getElementById('searchOverlayInput');
-    if (searchBtn && searchOverlay) {
+    if (searchBtn && searchOverlay && searchOverlayClose && searchForm && searchOverlayInput) {
       searchBtn.addEventListener('click', function() {
         searchOverlay.classList.add('open');
         searchOverlay.setAttribute('aria-hidden', 'false');
@@ -373,81 +415,54 @@
       });
     }
 
-    // Category filter logic
-    const catBtns = document.querySelectorAll('.cat-card');
-    const groups = document.querySelectorAll('.prod-group');
+    // ——— Products page: GSAP + initial category (tab listener already attached above) ———
+    (function() {
+      var section = document.querySelector('.products-page-section');
+      if (!section) return;
 
-    function filterByCat(cat) {
-      catBtns.forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
-      groups.forEach(g => {
-        if (cat === 'all') {
-          g.style.display = '';
-        } else {
-          g.style.display = g.dataset.group === cat ? '' : 'none';
-        }
-      });
-      // Reveal product cards so they are visible (GSAP may have set opacity 0 before ScrollTrigger fired)
-      const cardsToShow = cat === 'all'
-        ? document.querySelectorAll('.products-page-section .product-card')
-        : document.querySelectorAll('.prod-group[data-group="' + cat + '"] .product-card');
-      gsap.to(cardsToShow, { y: 0, opacity: 1, scale: 1, duration: 0.45, stagger: 0.04, ease: 'power2.out' });
-    }
-
-    catBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        const cat = this.dataset.cat;
-        gsap.fromTo(this, { scale: 1 }, { scale: 1.08, duration: 0.12, yoyo: true, repeat: 1 });
-        filterByCat(cat);
-      });
-    });
-
-    // Apply URL param on load
-    if (catParam) filterByCat(catParam);
-
-    // Search query: show all groups and filter grid items by q
-    if (qParam && qParam.trim()) {
-      const q = qParam.trim().toLowerCase();
-      filterByCat('all');
-      document.querySelectorAll('.prod-group').forEach(function(g) { g.style.display = ''; });
-      document.querySelectorAll('.cat-card').forEach(function(b) { b.classList.remove('active'); if (b.dataset.cat === 'all') b.classList.add('active'); });
-      const gridItems = document.querySelectorAll('.products-page-section .products-grid > *');
-      let hasMatch = false;
-      gridItems.forEach(function(item) {
-        const card = item.classList.contains('product-card') ? item : item.querySelector('.product-card');
-        const label = card ? (card.querySelector('.product-card-label') || card).textContent || '' : '';
-        const match = label.toLowerCase().indexOf(q) !== -1;
-        if (match) hasMatch = true;
-        item.classList.toggle('search-hidden', !match);
-      });
-      if (hasMatch) {
-        const first = document.querySelector('.products-page-section .products-grid > *:not(.search-hidden)');
-        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        try {
+          gsap.registerPlugin(ScrollTrigger);
+          var cards = section.querySelectorAll('.product-card');
+          gsap.set(cards, { y: 36, opacity: 0, scale: 0.94 });
+          ScrollTrigger.batch(cards, {
+            start: 'top 90%',
+            onEnter: function(batch) { gsap.to(batch, { y: 0, opacity: 1, scale: 1, duration: 0.55, stagger: 0.055, ease: 'back.out(1.15)' }); }
+          });
+          var groupLabels = section.querySelectorAll('.prod-group-label');
+          gsap.set(groupLabels, { opacity: 0, x: -20 });
+          ScrollTrigger.batch(groupLabels, {
+            start: 'top 92%',
+            onEnter: function(batch) { gsap.to(batch, { opacity: 1, x: 0, duration: 0.45, stagger: 0.08, ease: 'power2.out' }); }
+          });
+        } catch (err) {}
       }
-    }
 
-    // Animate product cards on scroll — staggered entrance with scale
-    gsap.registerPlugin(ScrollTrigger);
-    const cards = document.querySelectorAll('.products-page-section .product-card');
-    gsap.set(cards, { y: 36, opacity: 0, scale: 0.94 });
-    ScrollTrigger.batch(cards, {
-      start: 'top 90%',
-      onEnter: batch => gsap.to(batch, {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.55,
-        stagger: 0.055,
-        ease: 'back.out(1.15)'
-      })
-    });
-
-    // Animate category group labels when they enter view
-    const groupLabels = document.querySelectorAll('.products-page-section .prod-group-label');
-    gsap.set(groupLabels, { opacity: 0, x: -20 });
-    ScrollTrigger.batch(groupLabels, {
-      start: 'top 92%',
-      onEnter: batch => gsap.to(batch, { opacity: 1, x: 0, duration: 0.45, stagger: 0.08, ease: 'power2.out' })
-    });
+      var selectCat = window._productsSelectCategory;
+      if (catParam && selectCat) {
+        selectCat(catParam);
+      } else if (qParam && qParam.trim()) {
+        var q = qParam.trim().toLowerCase();
+        if (selectCat) selectCat('all');
+        section.querySelectorAll('.prod-group').forEach(function(g) { g.style.display = ''; });
+        section.querySelectorAll('.products-tab').forEach(function(b) { b.classList.remove('active'); if (b.getAttribute('data-cat') === 'all') b.classList.add('active'); });
+        var gridItems = section.querySelectorAll('.products-grid > *');
+        var hasMatch = false;
+        gridItems.forEach(function(item) {
+          var card = item.querySelector('.product-card');
+          var label = card ? (card.querySelector('.product-card-label') || card).textContent || '' : '';
+          var match = label.toLowerCase().indexOf(q) !== -1;
+          if (match) hasMatch = true;
+          item.classList.toggle('search-hidden', !match);
+        });
+        if (hasMatch) {
+          var first = section.querySelector('.products-grid > *:not(.search-hidden)');
+          if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      } else if (selectCat) {
+        selectCat('all');
+      }
+    })();
   </script>
 </body>
 </html>

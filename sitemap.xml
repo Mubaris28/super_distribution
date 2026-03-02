@@ -6,79 +6,79 @@
   <!-- Core pages - Mauritius island-wide coverage -->
   <url>
     <loc>https://superdistribution.mu/</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/about.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/contact.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/clients.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/career.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/compostable.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/household.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/stationary.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/religious.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/cosmetic.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/reseller-application.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/privacy-policy.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -86,13 +86,13 @@
   <!-- Career job pages -->
   <url>
     <loc>https://superdistribution.mu/career-job-salesman.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/career-job-driver.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -100,25 +100,25 @@
   <!-- Product inner pages — UJALA -->
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-ujala-whitener-2l.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-ujala-powder.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-ujala-laundry-soap.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-ujala-detergent-soap.html</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -126,21 +126,25 @@
   <!-- Product inner pages — Household / Personal Care -->
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-margo-soap.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-neem-toothpaste.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-maya-incense.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-napkin.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -148,76 +152,91 @@
   <!-- Product inner pages — Super Bio -->
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-range.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-plate.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-burger-box.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-take-away.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-salad-bowl.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-tub.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-boat-tray.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-bowl-lid.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-coffee-cup-single.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-coffee-cup-double.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-paper-cup.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-wooden-spoon.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-wooden-fork.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-wooden-knife.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://superdistribution.mu/products-innerpage/product-super-bio-tea-spoon.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
