@@ -169,6 +169,20 @@ body { background: var(--off-white); }
   color: var(--gray);
   min-width: 7rem;
 }
+.product-detail-cta {
+  display: inline-block;
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+  margin-right: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--red);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.2s, transform 0.2s;
+}
+.product-detail-cta:hover { background: var(--red-dark); color: #fff; transform: translateY(-1px); }
 .product-detail-back {
   display: inline-flex;
   align-items: center;

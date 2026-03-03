@@ -713,7 +713,8 @@ body.search-overlay-open #header {
 .coll-new-card:nth-child(3) .coll-new-title { color: #1a7a50; }
 .coll-new-card:nth-child(4) .coll-new-title { color: #8b5e1a; }
 .coll-new-card:nth-child(5) .coll-new-title { color: #1a6a2a; }
-.coll-new-card:nth-child(6) .coll-new-title { color: #4a2a8a; }
+.coll-new-card:nth-child(6) .coll-new-title { color: #b91c1c; }
+.coll-new-card:nth-child(7) .coll-new-title { color: #92400e; }
 
 .coll-new-desc {
   font-size: 0.95rem;
@@ -778,9 +779,10 @@ body.search-overlay-open #header {
 .coll-accent-neem   .coll-right-shape { background: #1a7a50; }
 .coll-accent-maya   .coll-right-shape { background: #8b5e1a; }
 .coll-accent-bio    .coll-right-shape { background: #1a6a2a; }
-.coll-accent-napkin .coll-right-shape { background: #4a2a8a; }
+.coll-accent-super-value .coll-right-shape { background: #b91c1c; }
+.coll-accent-napkin .coll-right-shape { background: #92400e; }
 
-/* CTA button accent per brand */
+/* CTA button accent per brand (card 1–7) */
 .coll-new-card:nth-child(1) .coll-new-cta { background: #003cba; box-shadow: 0 6px 24px rgba(0,60,186,0.35); }
 .coll-new-card:nth-child(1) .coll-new-cta:hover { background: #002a99; }
 .coll-new-card:nth-child(2) .coll-new-cta { background: #2d7a3a; box-shadow: 0 6px 24px rgba(45,122,58,0.35); }
@@ -791,8 +793,10 @@ body.search-overlay-open #header {
 .coll-new-card:nth-child(4) .coll-new-cta:hover { background: #6a4610; }
 .coll-new-card:nth-child(5) .coll-new-cta { background: #1a6a2a; box-shadow: 0 6px 24px rgba(26,106,42,0.35); }
 .coll-new-card:nth-child(5) .coll-new-cta:hover { background: #0f4a1a; }
-.coll-new-card:nth-child(6) .coll-new-cta { background: #4a2a8a; box-shadow: 0 6px 24px rgba(74,42,138,0.35); }
-.coll-new-card:nth-child(6) .coll-new-cta:hover { background: #361e6a; }
+.coll-new-card:nth-child(6) .coll-new-cta { background: #b91c1c; box-shadow: 0 6px 24px rgba(185,28,28,0.35); }
+.coll-new-card:nth-child(6) .coll-new-cta:hover { background: #991b1b; }
+.coll-new-card:nth-child(7) .coll-new-cta { background: #92400e; box-shadow: 0 6px 24px rgba(146,64,14,0.35); }
+.coll-new-card:nth-child(7) .coll-new-cta:hover { background: #78350f; }
 
 .coll-new-word {
   position: absolute;
@@ -816,7 +820,8 @@ body.search-overlay-open #header {
 .coll-accent-neem   .coll-new-word { color: #5bb89a; }
 .coll-accent-maya   .coll-new-word { color: #c9942e; }
 .coll-accent-bio    .coll-new-word { color: #4a9c4a; }
-.coll-accent-napkin .coll-new-word { color: #8b6bc4; }
+.coll-accent-super-value .coll-new-word { color: #f87171; }
+.coll-accent-napkin .coll-new-word { color: #d97706; }
 
 .coll-new-right {
   perspective: 1200px;
@@ -932,6 +937,22 @@ body.search-overlay-open #header {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+}
+
+/* The Super Value: dedicated img-wrap class and styles */
+.coll-new-img-wrap-super-value {
+  position: relative;
+  z-index: 2;
+  width: 400px;
+  height: 400px;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -18%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.45s ease-out;
 }
 
 .coll-new-placeholder .coll-placeholder-icon {
@@ -2585,6 +2606,7 @@ a.product-card-link:hover::after {
   .coll-accent-ujala .coll-new-img-wrap,
   .coll-accent-neem .coll-new-img-wrap,
   .coll-accent-bio .coll-new-img-wrap,
+  .coll-new-img-wrap-super-value,
   .coll-accent-napkin .coll-new-img-wrap { width: 400px; height: 400px; max-width: 400px; }
   .collection-inner { padding-left: 3rem; padding-right: 3rem; }
   .coll-next { right: -1rem; }
@@ -2608,6 +2630,7 @@ a.product-card-link:hover::after {
   .coll-accent-ujala .coll-new-img-wrap,
   .coll-accent-neem .coll-new-img-wrap,
   .coll-accent-bio .coll-new-img-wrap,
+  .coll-new-img-wrap-super-value,
   .coll-accent-napkin .coll-new-img-wrap { width: 300px; height: 300px; max-width: 300px; }
   .coll-new-word { font-size: clamp(2rem, 6vw, 3rem); }
   .coll-new-card .coll-new-cta,
@@ -2649,6 +2672,7 @@ a.product-card-link:hover::after {
   .coll-accent-ujala .coll-new-img-wrap,
   .coll-accent-neem .coll-new-img-wrap,
   .coll-accent-bio .coll-new-img-wrap,
+  .coll-new-img-wrap-super-value,
   .coll-accent-napkin .coll-new-img-wrap { width: 300px; height: 300px; max-width: 300px; }
   .coll-new-word { font-size: clamp(1.5rem, 5vw, 2rem); right: 0.25rem; opacity: 0.25; }
   .coll-slider-arrow { width: 42px; height: 42px; }
@@ -2753,6 +2777,7 @@ a.product-card-link:hover::after {
   .coll-accent-ujala .coll-new-img-wrap,
   .coll-accent-neem .coll-new-img-wrap,
   .coll-accent-bio .coll-new-img-wrap,
+  .coll-new-img-wrap-super-value,
   .coll-accent-napkin .coll-new-img-wrap { width: 140px; height: 140px; max-width: 140px; }
   .coll-new-word { font-size: clamp(1.25rem, 4.5vw, 1.6rem); right: 0.15rem; opacity: 0.22; }
   .coll-slider-arrow { width: 40px; height: 40px; }
@@ -2805,6 +2830,7 @@ a.product-card-link:hover::after {
   .coll-accent-ujala .coll-new-img-wrap,
   .coll-accent-neem .coll-new-img-wrap,
   .coll-accent-bio .coll-new-img-wrap,
+  .coll-new-img-wrap-super-value,
   .coll-accent-napkin .coll-new-img-wrap { width: 115px; height: 115px; max-width: 115px; }
   .coll-new-word { font-size: 1rem; right: 0.1rem; opacity: 0.2; letter-spacing: 0.15em; }
   .coll-slider-arrow { width: 36px; height: 36px; }

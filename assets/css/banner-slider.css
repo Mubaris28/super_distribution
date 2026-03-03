@@ -162,6 +162,18 @@
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(40, 80, 30, 0.08) 50%, rgba(30, 60, 25, 0.25) 100%);
 }
 
+/* Super Value slide: red — deep red / burgundy */
+.banner-slide-bg-super-value {
+  background: linear-gradient(145deg, #1a0a0a 0%, #2d1515 35%, #4a1a1a 65%, #6b2020 100%) !important;
+}
+.banner-slide-shape-super-value {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(180, 50, 50, 0.12) 50%, rgba(255, 255, 255, 0.03) 100%);
+}
+.banner-slide-glow-super-value {
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.08) 0%, transparent 55%);
+  opacity: 0.9;
+}
+
 .banner-slide-glow {
   position: absolute; width: 90%; height: 90%; border-radius: 50%;
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 45%, transparent 70%);
