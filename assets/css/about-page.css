@@ -1,0 +1,290 @@
+/* About page – new design UI */
+.about-page { background: #fafafa; }
+
+/* Hero – full width, bold */
+.about-page .about-hero {
+  min-height: 52vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #0f0f0f 0%, #1a0a0a 35%, #2d1515 70%, #1a0a0a 100%);
+}
+.about-page .about-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(232,23,27,0.12) 0%, transparent 50%),
+              radial-gradient(ellipse 80% 60% at 80% 80%, rgba(255,255,255,0.04) 0%, transparent 45%);
+  pointer-events: none;
+}
+.about-page .about-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+.about-page .about-hero-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 1.25rem;
+}
+.about-page .about-hero-logo {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+.about-page .about-hero-logo img {
+  max-width: 200px;
+  height: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+.about-page .about-hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+.about-page .about-hero-title em { font-style: normal; color: var(--red-light); }
+.about-page .about-hero-sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Content container */
+.about-page .about-content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 4rem 2rem 5rem;
+}
+
+/* Intro block */
+.about-page .about-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+.about-page .about-intro-title {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin: 0 0 1rem;
+}
+.about-page .about-intro-title em { font-style: normal; color: var(--red); }
+.about-page .about-intro-text {
+  font-size: 1rem;
+  color: var(--gray);
+  line-height: 1.75;
+  margin: 0;
+}
+.about-page .about-intro-text + .about-intro-text { margin-top: 1rem; }
+
+/* Mission & Vision */
+.about-page .about-mv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+.about-page .about-mv-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.about-page .about-mv-card h3 {
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--red);
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.02em;
+}
+.about-page .about-mv-card p {
+  font-size: 0.95rem;
+  color: var(--gray);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Values */
+.about-page .about-values-wrap {
+  margin-bottom: 4rem;
+}
+.about-page .about-values-title {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin: 0 0 1.5rem;
+}
+.about-page .about-values-title em { font-style: normal; color: var(--red); }
+.about-page .about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+.about-page .about-value-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.about-page .about-value-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.about-page .about-value-item strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--dark);
+  margin-bottom: 0.35rem;
+}
+.about-page .about-value-item span {
+  font-size: 0.8rem;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+/* Team section lives inside about-content, reuse .about-team */
+.about-page .about-team {
+  padding: 0 0 3rem;
+  background: transparent;
+}
+.about-page .about-cta {
+  text-align: center;
+  margin-top: 2rem;
+}
+.about-page .about-cta .about-cta-btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  background: var(--red);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: 9999px;
+  transition: background 0.25s, transform 0.2s;
+}
+.about-page .about-cta .about-cta-btn:hover {
+  background: var(--red-dark);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .about-page .about-intro { grid-template-columns: 1fr; }
+  .about-page .about-mv { grid-template-columns: 1fr; }
+  .about-page .about-values-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .about-page .about-hero { min-height: 45vh; padding: 3rem 1.5rem 4rem; }
+  .about-page .about-content { padding: 3rem 1rem 4rem; }
+  .about-page .about-values-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== About page animations & effects (body.page-about) ========== */
+.page-about .about-split-block {
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.page-about .about-split-img {
+  overflow: hidden;
+  border-radius: 16px;
+}
+.page-about .about-split-img img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+.page-about .about-split-img:hover img {
+  transform: scale(1.06);
+}
+.page-about .about-split-body {
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* Value cards – lift, shadow and subtle scale on hover */
+.page-about .about-value-card {
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.35s ease,
+              border-color 0.3s ease;
+}
+.page-about .about-value-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(232, 23, 27, 0.12);
+}
+
+/* Founder card image – zoom on hover */
+.page-about .founder-card-pic {
+  overflow: hidden;
+  border-radius: 16px;
+}
+.page-about .founder-card-pic img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.page-about .founder-card-pic:hover img {
+  transform: scale(1.05);
+}
+
+/* Team cards – image scale and card lift */
+.page-about .team-card-pic {
+  overflow: hidden;
+  border-radius: 50%;
+}
+.page-about .team-card-pic img {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.page-about .team-card:hover .team-card-pic img {
+  transform: scale(1.08);
+}
+.page-about .team-card--no-border:hover {
+  transform: translateY(-6px);
+}
+
+/* Front office images – subtle zoom */
+.page-about .front-office-ebene {
+  overflow: hidden;
+  border-radius: 16px;
+}
+.page-about .front-office-ebene img {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.page-about .front-office-ebene:hover img {
+  transform: scale(1.04);
+}
+.page-about .front-office-anaija-arc {
+  overflow: hidden;
+}
+.page-about .front-office-anaija-arc img {
+  transition: transform 0.5s ease;
+}
+.page-about .front-office-anaija:hover .front-office-anaija-arc img {
+  transform: scale(1.06);
+}
+
+/* Initial state for GSAP scroll animations (reduced motion respected) */
+@media (prefers-reduced-motion: no-preference) {
+  .page-about .about-split-block.about-anim-in,
+  .page-about .about-split-body.about-anim-in,
+  .page-about .about-value-card.about-anim-in,
+  .page-about .founder-card.about-anim-in,
+  .page-about .team-block.about-anim-in {
+    visibility: visible;
+  }
+}

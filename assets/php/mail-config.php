@@ -14,8 +14,8 @@
 define('SMTP_HOST',  'smtp.gmail.com');
 define('SMTP_PORT',  587);                              // 587 = STARTTLS
 define('SMTP_USER',  'mubarismuhammed33@gmail.com');    // Gmail address sending the mail
-define('SMTP_PASS',  'PASTE_YOUR_APP_PASSWORD_HERE');   // ← paste 16-char App Password here
+define('SMTP_PASS',  'ozfp udpe wmvq xqda');   // ← REQUIRED: paste Gmail App Password (16 chars, no spaces) or mail will fail
 define('FROM_EMAIL', 'mubarismuhammed33@gmail.com');    // must match SMTP_USER for Gmail
 define('FROM_NAME',  'Super Distribution Website');
-define('TO_EMAIL',   'orders@superdistribution.mu');    // inbox that receives form submissions
+define('TO_EMAIL',   'mubarismuhammed33@gmail.com');    // inbox that receives form submissions
 define('TO_NAME',    'Super Distribution');

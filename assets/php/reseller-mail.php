@@ -278,7 +278,7 @@ $autoReplyHtml = '<!DOCTYPE html>
       <p style="margin:0 0 8px;font-size:14px;color:#555;line-height:1.7;">Questions? Reach us directly:</p>
       <table cellpadding="0" cellspacing="0" style="font-size:13px;color:#555;">
         <tr><td style="padding:3px 0;">&#128222;&nbsp;</td><td><a href="tel:+23052345678" style="color:#C8000A;text-decoration:none;">+230 5234 5678</a></td></tr>
-        <tr><td style="padding:3px 0;">&#9993;&nbsp;</td><td><a href="mailto:orders@superdistribution.mu" style="color:#C8000A;text-decoration:none;">orders@superdistribution.mu</a></td></tr>
+        <tr><td style="padding:3px 0;">&#9993;&nbsp;</td><td><a href="mailto:' . TO_EMAIL . '" style="color:#C8000A;text-decoration:none;">' . TO_EMAIL . '</a></td></tr>
       </table>
     </td>
   </tr>
@@ -305,7 +305,7 @@ $autoReplyText = "Hi $companyName,\n\n"
     . "  Region:   $region\n"
     . "  Type:     $resellerTypeLabel\n"
     . "  Services: $serviceList\n\n"
-    . "Contact us: orders@superdistribution.mu | +230 5234 5678\n\n"
+    . "Contact us: " . TO_EMAIL . " | +230 5234 5678\n\n"
     . "Super Distribution Ltd. — Port Louis, Mauritius\n";
 
 /* ── Send ─────────────────────────────────────────────────────── */
@@ -366,6 +366,6 @@ try {
     http_response_code(500);
     echo json_encode([
         'success' => false,
-        'message' => 'Could not submit right now. Please email us at orders@superdistribution.mu'
+        'message' => 'Could not submit right now. Please email us at ' . TO_EMAIL
     ]);
 }

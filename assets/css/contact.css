@@ -50,6 +50,13 @@ body { background: var(--off-white); }
 .contact-section { padding: 4rem 2rem 6rem; }
 .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: start; }
 
+/* Let's Talk (left) scrolls; Send us a Message (right) stays in view until map */
+.contact-form-col {
+  position: sticky;
+  top: 6rem;
+  padding-top: 2rem;
+}
+
 .contact-info-heading {
   font-family: var(--font-head);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
@@ -321,6 +328,19 @@ body { background: var(--off-white); }
   color: var(--white);
 }
 
+/* Inline error (contact form) */
+.form-inline-error {
+  display: none;
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font-size: 0.88rem;
+  color: #b91c1c;
+  line-height: 1.5;
+  margin-top: 1rem;
+}
+
 /* Server error banner */
 .form-server-error {
   display: none;
@@ -373,6 +393,7 @@ body { background: var(--off-white); }
 
 @media (max-width: 900px) {
   .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .contact-form-col { position: static; }
   .contact-form-card { padding: 2rem; }
   .form-row { grid-template-columns: 1fr; }
 }

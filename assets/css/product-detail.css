@@ -7,9 +7,13 @@ body { background: var(--off-white); }
   position: relative;
   overflow: hidden;
 }
+/* Religious inner pages: distinct deep red / burgundy hero (no green) */
 .page-hero-religious {
-  background: linear-gradient(135deg, #1a0f05 0%, #2d1810 25%, #4a2618 50%, #6b3820 75%, #8B4513 100%);
+  background: linear-gradient(135deg, #1a0508 0%, #2d0a10 25%, #4a1518 40%, #6b2025 60%, #8b2828 100%);
+  box-shadow: inset 0 0 120px rgba(0,0,0,0.2);
 }
+.page-hero-religious .page-hero-title em { color: rgba(255,255,255,0.95); }
+.page-hero-religious .page-hero-tag { border-color: rgba(232,23,27,0.5); background: rgba(232,23,27,0.15); }
 .page-hero-household {
   background: linear-gradient(135deg, #000a1a 0%, #001030 25%, #001540 50%, #051a70 75%, #0a0a8a 100%);
 }
@@ -81,6 +85,98 @@ body { background: var(--off-white); }
   object-fit: contain;
 }
 
+/* Laundry (and similar) color-shade slider inside .product-detail-img-wrap */
+.product-detail-img-wrap .product-detail-img-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+}
+.product-detail-img-wrap .product-detail-img-slider-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.35s ease-out;
+}
+.product-detail-img-wrap .product-detail-img-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-width: 0;
+}
+.product-detail-img-wrap .product-detail-img-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.product-detail-img-slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+  color: var(--dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  transition: background 0.2s, transform 0.2s;
+  z-index: 2;
+}
+.product-detail-img-slider-btn:hover {
+  background: var(--white);
+  transform: translateY(-50%) scale(1.05);
+}
+.product-detail-img-slider-prev { left: 0.75rem; }
+.product-detail-img-slider-next { right: 0.75rem; }
+@media (max-width: 768px) {
+  .product-detail-img-slider-prev { left: 0.5rem; }
+  .product-detail-img-slider-next { right: 0.5rem; }
+  .product-detail-img-slider-btn { width: 38px; height: 38px; }
+  .product-detail-img-slider-btn svg { width: 20px; height: 20px; }
+}
+
+/* Variants gallery (Laundry, Dish Washing, Hand Soap inner pages) */
+.product-detail-variants {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--light-gray);
+}
+.product-detail-variants-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+.product-detail-variants-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+.product-detail-variants-grid img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  background: linear-gradient(135deg, #F6F6F6 0%, #E6E8E6 100%);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+}
+@media (min-width: 640px) {
+  .product-detail-variants-grid img { width: 140px; height: 140px; }
+}
+
 /* Maya detail: two images in one row, content below */
 .product-detail-grid-maya {
   display: flex;
@@ -120,6 +216,85 @@ body { background: var(--off-white); }
 }
 @media (max-width: 640px) {
   .product-detail-maya-img-row { grid-template-columns: 1fr; }
+}
+
+/* Nisha Hair Cream: shade gallery */
+.product-detail-nisha-shades {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  width: 100%;
+}
+.product-detail-nisha-shades-title {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.25rem;
+}
+.product-detail-nisha-shades-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+}
+.product-detail-nisha-shade-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #F8F8F8 0%, #EEEEEE 100%);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  min-width: 0;
+}
+.product-detail-nisha-shade-item img {
+  max-height: 400px;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.product-detail-nisha-shade-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray);
+  text-align: center;
+}
+/* Mobile: horizontal slider for Nisha shades */
+@media (max-width: 768px) {
+  .product-detail-nisha-shades-grid {
+    display: flex;
+    grid-template-columns: unset;
+    gap: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+  }
+  .product-detail-nisha-shade-item {
+    flex: 0 0 72%;
+    min-width: 72%;
+    scroll-snap-align: center;
+  }
+  .product-detail-nisha-shade-item img {
+    max-height: 320px;
+    width: auto;
+    max-width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .product-detail-nisha-shade-item {
+    flex: 0 0 85%;
+    min-width: 85%;
+  }
+  .product-detail-nisha-shade-item img {
+    max-height: 280px;
+  }
 }
 
 .product-detail-body {}

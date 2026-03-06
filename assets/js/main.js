@@ -156,7 +156,7 @@ document.querySelectorAll('.mm-link').forEach(link => link.addEventListener('cli
     { name: 'MARGO Soap',                 cat: 'Household',    img: base + 'assets/images/products/margo_soap/Margo.png',                                href: base + 'products-innerpage/product-margo-soap.html' },
     { name: 'Neem Toothpaste',            cat: 'Household',    img: base + 'assets/images/products/Neem_toothpaste/Neem_toothpaste_packshot.png',        href: base + 'products-innerpage/product-neem-toothpaste.html' },
     { name: 'Super Napkin',               cat: 'Household',    img: base + 'assets/images/products/Napkin/napkin.png',                                   href: base + 'products-innerpage/product-super-napkin.html' },
-    { name: 'Maya Incense Sticks',        cat: 'Religious',    img: base + 'assets/images/products/maya/Maya_Sandal_Big.png',                            href: base + 'products-innerpage/product-maya-incense.html' },
+    { name: 'Maya Incense Sticks',        cat: 'Religious Section',    img: base + 'assets/images/products/maya/Maya_Sandal_Big.png',                            href: base + 'products-innerpage/product-maya-incense.html' },
     { name: 'Super Bio Wooden Spoon',     cat: 'Compostable',  img: base + 'assets/images/products/super_bio/Spoon.png',                                 href: base + 'products-innerpage/product-super-bio-wooden-spoon.html' },
     { name: 'Super Bio Wooden Fork',      cat: 'Compostable',  img: base + 'assets/images/products/super_bio/Fork  packshot.png',                       href: base + 'products-innerpage/product-super-bio-wooden-fork.html' },
     { name: 'Super Bio Wooden Knife',     cat: 'Compostable',  img: base + 'assets/images/products/super_bio/Knife packshot.png',                       href: base + 'products-innerpage/product-super-bio-wooden-knife.html' },
@@ -316,7 +316,7 @@ function goPrev() { if (!slides.length) return; showSlide((currentSlide - 1 + sl
 
 function restartAutoPlay() {
   clearInterval(autoPlayTimer);
-  if (slides.length) autoPlayTimer = setInterval(goNext, 7500);
+  if (slides.length) autoPlayTimer = setInterval(goNext, 14000);
 }
 
 if (nextBtn) nextBtn.addEventListener('click', () => { goNext(); restartAutoPlay(); });
@@ -571,21 +571,30 @@ scrollReveal('.footer-inner', { y: 30, duration: 0.6 });
 
   window.addEventListener('resize', () => goTo(index, true));
 
-  // Auto-advance disabled: collection slides change only via arrows or swipe
+  // Auto-advance: runs until user hovers/focuses the section, then resumes on mouse/focus leave
+  const COLL_AUTO_MS = 5000;
   let collAutoTimer = null;
   function startCollAuto() {
     clearInterval(collAutoTimer);
+    collAutoTimer = setInterval(function() {
+      goTo(index + 1 >= total ? 0 : index + 1);
+    }, COLL_AUTO_MS);
+  }
+  function stopCollAuto() {
+    clearInterval(collAutoTimer);
     collAutoTimer = null;
   }
-  function stopCollAuto() { clearInterval(collAutoTimer); }
-  function resetCollAuto() { stopCollAuto(); startCollAuto(); }
+  function resetCollAuto() {
+    stopCollAuto();
+    startCollAuto();
+  }
 
   const sliderWrap = document.querySelector('.coll-slider-wrap');
   if (sliderWrap) {
     sliderWrap.addEventListener('mouseenter', stopCollAuto);
     sliderWrap.addEventListener('mouseleave', startCollAuto);
-    sliderWrap.addEventListener('focusin',    stopCollAuto);
-    sliderWrap.addEventListener('focusout',   startCollAuto);
+    sliderWrap.addEventListener('focusin',  stopCollAuto);
+    sliderWrap.addEventListener('focusout', startCollAuto);
   }
 
   // Initial: first card fully visible, rest hidden at right edge
@@ -598,7 +607,7 @@ scrollReveal('.footer-inner', { y: 30, duration: 0.6 });
     }
   });
   goTo(0, true);
-  /* startCollAuto(); — auto-slide disabled */
+  startCollAuto();
 })();
 
 // Collection: 3D tilt on image only when mouse is over the RIGHT side (.coll-new-right) of the active card
@@ -684,7 +693,7 @@ scrollReveal('.footer-inner', { y: 30, duration: 0.6 });
     }
 
     var currentCat = 'all';
-    function applyFilter(cat) {
+    function applyFilter(cat, animateEntrance) {
       currentCat = cat;
       var tabs = tabsWrap.querySelectorAll('.prod-tab');
       var items = Array.from(grid.children);
@@ -696,14 +705,33 @@ scrollReveal('.footer-inner', { y: 30, duration: 0.6 });
       fetch('http://127.0.0.1:7245/ingest/98aa9fc5-cf75-4ae1-a6d9-2bf518924633',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'main.js:applyFilter',message:'home applyFilter',data:{cat:cat,matchingLen:matching.length,toShowLen:toShow.length},timestamp:Date.now(),hypothesisId:'H3'})}).catch(function(){});
       // #endregion
       toShow.forEach(function(item) { item.classList.remove('hidden'); });
-      toShow.forEach(function(item) {
-        var card = item.classList.contains('product-card') ? item : item.querySelector('.product-card');
-        if (card) {
-          card.style.opacity = '1';
-          card.style.transform = '';
-          if (typeof gsap !== 'undefined' && gsap.set) gsap.set(card, { opacity: 1, y: 0, scale: 1 });
+      var cardsToAnimate = toShow.map(function(item) {
+        return item.classList.contains('product-card') ? item : item.querySelector('.product-card');
+      }).filter(Boolean);
+      if (animateEntrance && typeof gsap !== 'undefined' && gsap.set && gsap.to) {
+        gsap.set(cardsToAnimate, { opacity: 0, y: 28, scale: 0.94 });
+        gsap.to(cardsToAnimate, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.52,
+          ease: 'back.out(1.18)',
+          stagger: 0.06,
+          overwrite: true
+        });
+      } else {
+        if (typeof gsap !== 'undefined' && gsap.set) {
+          cardsToAnimate.forEach(function(card) { gsap.set(card, { opacity: 1, y: 0, scale: 1 }); });
+        } else {
+          toShow.forEach(function(item) {
+            var card = item.classList.contains('product-card') ? item : item.querySelector('.product-card');
+            if (card) {
+              card.style.opacity = '1';
+              card.style.transform = '';
+            }
+          });
         }
-      });
+      }
     }
 
     // Click on tabs (use capture so we get the event first)
@@ -714,10 +742,10 @@ scrollReveal('.footer-inner', { y: 30, duration: 0.6 });
       e.stopPropagation();
       var cat = tab.getAttribute('data-cat');
       if (!cat) return;
-      applyFilter(cat);
+      applyFilter(cat, true);
     }, true);
 
-    applyFilter('all');
+    applyFilter('all', false);
 
     // GSAP: hide all cards initially, reveal on scroll; then re-apply filter so visible 8 stay visible
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
@@ -730,7 +758,7 @@ scrollReveal('.footer-inner', { y: 30, duration: 0.6 });
           gsap.to(cards, { y: 0, opacity: 1, scale: 1, duration: 0.55, ease: 'back.out(1.2)', stagger: 0.07 });
         }
       });
-      applyFilter(currentCat);
+      applyFilter(currentCat, false);
     }
   }
 
@@ -741,23 +769,31 @@ scrollReveal('.footer-inner', { y: 30, duration: 0.6 });
   }
 })();
 
-// Stats counters
-document.querySelectorAll('.stat-item').forEach(item => {
-  const numEl  = item.querySelector('.stat-num');
-  const target = parseInt(item.dataset.count) || 0;
-  const suffix = item.dataset.suffix || '';
-  ScrollTrigger.create({
-    trigger: item, start: 'top 82%', once: true,
-    onEnter: () => {
-      const obj = { val: 0 };
-      gsap.to(obj, {
-        val: target, duration: 2, ease: 'power2.out',
-        snap: { val: 1 },
-        onUpdate() { numEl.textContent = Math.round(obj.val) + suffix; }
-      });
-    }
+// Stats counters (only when GSAP + ScrollTrigger exist)
+if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
+  document.querySelectorAll('.stat-item').forEach(function(item) {
+    var numEl = item.querySelector('.stat-num');
+    var target = parseInt(item.dataset.count, 10) || 0;
+    var suffix = item.dataset.suffix || '';
+    ScrollTrigger.create({
+      trigger: item,
+      start: 'top 82%',
+      once: true,
+      onEnter: function() {
+        var obj = { val: 0 };
+        gsap.to(obj, {
+          val: target,
+          duration: 2,
+          ease: 'power2.out',
+          snap: { val: 1 },
+          onUpdate: function() {
+            if (numEl) numEl.textContent = Math.round(obj.val) + suffix;
+          }
+        });
+      }
+    });
   });
-});
+}
 
 // Partner grid items
 (function() {
@@ -785,7 +821,7 @@ scrollReveal('.cta-actions',  { y: 40, duration: 0.7, delay: 0.24 });
   var dropdown = document.getElementById('ctaEmailDropdown');
   var wrap = trigger && trigger.closest('.cta-email-dropdown-wrap');
   if (!trigger || !dropdown || !wrap) return;
-  var email = 'orders@superdistribution.mu';
+  var email = 'superdistributionltd@gmail.com';
   var copyBtn = dropdown.querySelector('[data-action="copy"]');
 
   function open() {
@@ -918,53 +954,67 @@ document.querySelectorAll('.p-item-art').forEach((el, i) => {
 });
 
 /* =========================================
-   SCROLL TO TOP BUTTON (all pages)
+   FLOATING BUTTONS: social + reseller + whatsapp (above) + scroll to top (below)
    ========================================= */
 (function() {
-  var btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'scroll-to-top';
-  btn.setAttribute('aria-label', 'Scroll to top');
-  btn.innerHTML = '<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="18,15 12,9 6,15"/></svg>';
-  document.body.appendChild(btn);
+  var wrap = document.createElement('div');
+  wrap.className = 'float-buttons-wrap';
 
-  function updateVisibility() {
-    if (window.scrollY > 400) btn.classList.add('visible');
-    else btn.classList.remove('visible');
-  }
+  var group = document.createElement('div');
+  group.className = 'float-buttons-group';
 
-  btn.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  var fb = document.createElement('a');
+  fb.className = 'float-btn float-btn-fb';
+  fb.href = 'https://www.facebook.com/superdistributionltd/';
+  fb.target = '_blank';
+  fb.rel = 'noopener noreferrer';
+  fb.setAttribute('aria-label', 'Facebook');
+  fb.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>';
 
-  window.addEventListener('scroll', updateVisibility, { passive: true });
-  updateVisibility();
-})();
+  var ig = document.createElement('a');
+  ig.className = 'float-btn float-btn-insta';
+  ig.href = 'https://www.instagram.com/superdistribution';
+  ig.target = '_blank';
+  ig.rel = 'noopener noreferrer';
+  ig.setAttribute('aria-label', 'Instagram');
+  ig.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>';
 
-/* =========================================
-   RESELLER FLOATING BUTTON (all pages)
-   ========================================= */
-(function() {
-  var reseller = document.createElement('a');
-  reseller.className = 'reseller-float';
-  reseller.href = document.location.pathname.indexOf('products-innerpage') !== -1 ? '../reseller-application.html' : 'reseller-application.html';
-  reseller.setAttribute('aria-label', 'Become a reseller');
-  reseller.innerHTML = '<svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
-  document.body.appendChild(reseller);
-})();
-
-/* =========================================
-   WHATSAPP FLOATING BUTTON (all pages)
-   ========================================= */
-(function() {
   var wa = document.createElement('a');
-  wa.className = 'whatsapp-float';
+  wa.className = 'float-btn float-btn-wa';
   wa.href = 'https://wa.me/23052345678?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20your%20products.';
   wa.target = '_blank';
   wa.rel = 'noopener noreferrer';
-  wa.setAttribute('aria-label', 'Chat with us on WhatsApp');
-  wa.innerHTML = '<svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>';
-  document.body.appendChild(wa);
+  wa.setAttribute('aria-label', 'WhatsApp');
+  wa.innerHTML = '<svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>';
+
+  var reseller = document.createElement('a');
+  reseller.className = 'float-btn float-btn-reseller';
+  reseller.href = document.location.pathname.indexOf('products-innerpage') !== -1 ? '../reseller-application.html' : 'reseller-application.html';
+  reseller.setAttribute('aria-label', 'Become a reseller');
+  reseller.innerHTML = '<svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+
+  group.appendChild(fb);
+  group.appendChild(ig);
+  group.appendChild(wa);
+  group.appendChild(reseller);
+  wrap.appendChild(group);
+
+  var scrollBtn = document.createElement('button');
+  scrollBtn.type = 'button';
+  scrollBtn.className = 'scroll-to-top';
+  scrollBtn.setAttribute('aria-label', 'Scroll to top');
+  scrollBtn.innerHTML = '<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="18,15 12,9 6,15"/></svg>';
+  wrap.appendChild(scrollBtn);
+
+  document.body.appendChild(wrap);
+
+  function updateVisibility() {
+    if (window.scrollY > 400) scrollBtn.classList.add('visible');
+    else scrollBtn.classList.remove('visible');
+  }
+  scrollBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  window.addEventListener('scroll', updateVisibility, { passive: true });
+  updateVisibility();
 })();
 
 console.log('%cSuper Distribution', 'color: #E8171B; font-size: 1.5rem; font-weight: bold;');

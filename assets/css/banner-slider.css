@@ -53,6 +53,17 @@
 
 .banner-slide.active { opacity: 1; pointer-events: all; }
 
+.banner-slide-link {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  z-index: 2;
+}
+
 .banner-slide-bg {
   position: absolute;
   top: 0;
@@ -160,6 +171,10 @@
 
 .banner-slide-shape-margo {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(40, 80, 30, 0.08) 50%, rgba(30, 60, 25, 0.25) 100%);
+}
+
+.banner-slide-shape-maya {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(180, 100, 40, 0.1) 50%, rgba(120, 60, 20, 0.2) 100%);
 }
 
 /* Super Value slide: red — deep red / burgundy */

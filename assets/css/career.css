@@ -323,17 +323,33 @@
 .cform-input:focus, .cform-select:focus, .cform-textarea:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(232,23,27,0.07); }
 .cform-select { appearance: none; cursor: pointer; }
 .cform-textarea { resize: vertical; min-height: 100px; }
-.cform-upload {
-  border: 2px dashed var(--light-gray); border-radius: var(--radius-md);
-  padding: 1.4rem; text-align: center; background: var(--off-white);
-  position: relative; cursor: pointer; transition: border-color 0.2s;
+.cform-label-hint { color: var(--gray); font-weight: 400; font-size: 0.85em; }
+.cform-file-wrap {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem;
+  border: 1.5px solid var(--light-gray); border-radius: var(--radius-md);
+  padding: 0.65rem 1rem; background: var(--white);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
-.cform-upload:hover { border-color: var(--red); }
-.cform-upload input[type="file"] { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
-.cform-upload-inner { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; pointer-events: none; }
-.cform-upload-icon { font-size: 1.4rem; }
-.cform-upload p { font-size: 0.8rem; color: var(--gray); }
-.cform-upload strong { color: var(--red); }
+.cform-file-wrap:focus-within { border-color: var(--red); box-shadow: 0 0 0 3px rgba(232,23,27,0.07); }
+.cform-file-input { position: absolute; width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden; z-index: -1; }
+.cform-file-display { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; flex: 1; min-width: 0; }
+.cform-file-name {
+  font-size: 0.88rem; color: var(--gray); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.cform-file-name.has-file { color: var(--dark); font-weight: 500; }
+.cform-file-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.45rem 1rem; background: var(--off-white); border: 1.5px solid var(--light-gray);
+  border-radius: var(--radius-md); font-family: var(--font-head); font-size: 0.85rem; font-weight: 600;
+  color: var(--red); cursor: pointer; transition: background 0.2s, border-color 0.2s;
+}
+.cform-file-btn:hover { background: rgba(232,23,27,0.06); border-color: var(--red); }
+.cform-file-remove {
+  display: none; align-items: center; padding: 0.4rem 0.75rem;
+  background: transparent; border: 1px solid var(--light-gray); border-radius: var(--radius-md);
+  font-size: 0.8rem; color: var(--gray); cursor: pointer; transition: color 0.2s, border-color 0.2s;
+}
+.cform-file-remove:hover { color: var(--red); border-color: var(--red); }
 .cform-submit {
   display: flex; align-items: center; justify-content: center; gap: 0.5rem;
   width: 100%; padding: 0.9rem 2rem; background: var(--red); color: white;
