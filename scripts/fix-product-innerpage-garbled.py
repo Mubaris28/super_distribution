@@ -31,8 +31,9 @@ REPLACEMENTS = [
 ]
 
 POWERED_LINK = (
-    'Powered by <a href="https://www.theflashgroups.com/" '
-    'target="_blank" rel="noopener noreferrer">Flash Communications Ltd.</a>'
+    '© 2026 Super Distribution Ltd. All rights reserved. | Powered by '
+    '<a href="https://www.theflashgroups.com/" target="_blank" '
+    'rel="noopener noreferrer">Flash Communications Ltd.</a>'
 )
 
 

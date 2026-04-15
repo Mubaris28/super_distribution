@@ -2424,6 +2424,15 @@ a.cta-email-dropdown-email:hover {
   color: rgba(255,255,255,0.6);
 }
 
+.footer-bottom a {
+  color: #ffffff !important;
+  transition: color 0.25s ease;
+}
+
+.footer-bottom a:hover {
+  color: #ff002f !important;
+}
+
 /* Reseller CTA bar — appears on every page */
 .reseller-cta-bar {
   background: #ffffff;
