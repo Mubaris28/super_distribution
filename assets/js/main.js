@@ -143,13 +143,18 @@ document.querySelectorAll('.mm-link').forEach(link => link.addEventListener('cli
   const searchBtn = document.querySelector('.search-btn');
   if (!searchBtn) return;
 
+  searchBtn.setAttribute('type', 'button');
   const path = window.location.pathname;
   const isInner = /\/products-innerpage\//.test(path);
   const base = isInner ? '../' : '';
   const productsUrl = base + 'products.html';
 
   const products = [
-    { name: 'UJALA Liquid Detergent 2L',          cat: 'Household',    img: base + 'assets/images/products/ujala/ujala_whitener_2L.png',                         href: base + 'products-innerpage/product-ujala-whitener-2l.html' },
+    { name: 'SD Banana leaf X 100',               cat: 'Religious Section', img: base + 'assets/images/products/religious-section/banana/banana.png',      href: base + 'products-innerpage/product-religious-banana-leaf-x100.html' },
+    { name: 'SD Surgical Mask x 50',              cat: 'Personal care',  img: base + 'assets/images/products/personal-care/mask.png',                        href: base + 'products-innerpage/product-personal-care-surgical-mask-x50.html' },
+    { name: 'SD Hair net x 100',                  cat: 'Personal care',  img: base + 'assets/images/products/personal-care/hairnet.png',                     href: base + 'products-innerpage/product-personal-care-hair-net-x100.html' },
+    { name: 'SD Glove x 100',                     cat: 'Personal care',  img: base + 'assets/images/products/personal-care/glove.png',                       href: base + 'products-innerpage/product-personal-care-glove-x100.html' },
+    { name: 'UJALA Liquid Detergent 2L',          cat: 'Household',    img: base + 'assets/images/products/ujala/Ujala%202L.png',                         href: base + 'products-innerpage/product-ujala-whitener-2l.html' },
     { name: 'UJALA Powder 1kg & 500g',    cat: 'Household',    img: base + 'assets/images/products/ujala/Ujala_powder.png',                              href: base + 'products-innerpage/product-ujala-powder.html' },
     { name: 'UJALA Laundry Soap 150g',    cat: 'Household',    img: base + 'assets/images/products/ujala/Ujala_laudary_ soap.png',                       href: base + 'products-innerpage/product-ujala-laundry-soap.html' },
     { name: 'UJALA Detergent Soap 110g',  cat: 'Household',    img: base + 'assets/images/products/ujala/Ujala_Instant_Dissolver_soap.png',              href: base + 'products-innerpage/product-ujala-detergent-soap.html' },
@@ -189,18 +194,27 @@ document.querySelectorAll('.mm-link').forEach(link => link.addEventListener('cli
     '</div>';
   document.body.appendChild(overlay);
 
-  const input = document.getElementById('searchOverlayInput');
-  const form  = document.getElementById('searchForm');
-  const closeBtn = document.getElementById('searchOverlayClose');
-  const grid  = document.getElementById('searchProductsGrid');
+  const input = overlay.querySelector('#searchOverlayInput');
+  const form  = overlay.querySelector('#searchForm');
+  const closeBtn = overlay.querySelector('#searchOverlayClose');
+  const grid  = overlay.querySelector('#searchProductsGrid');
+  if (!input || !form || !closeBtn || !grid) return;
+
+  function matchProduct(p, term) {
+    const name = p.name.toLowerCase();
+    const cat = p.cat.toLowerCase();
+    const words = term.split(/\s+/).filter(Boolean);
+    if (words.length === 0) return true;
+    return words.every(w => name.includes(w) || cat.includes(w));
+  }
 
   function renderCards(q) {
     const term = (q || '').trim().toLowerCase();
     const list = term
-      ? products.filter(p => p.name.toLowerCase().includes(term) || p.cat.toLowerCase().includes(term))
+      ? products.filter(p => matchProduct(p, term))
       : products;
     if (!list.length) {
-      grid.innerHTML = '<p class="search-no-results">No products found for "<strong>' + (q || '') + '</strong>"</p>';
+      grid.innerHTML = '<p class="search-no-results">No products found for "<strong>' + (q || '').replace(/</g, '&lt;') + '</strong>"</p>';
       return;
     }
     grid.innerHTML = list.map(p =>
@@ -216,7 +230,16 @@ document.querySelectorAll('.mm-link').forEach(link => link.addEventListener('cli
     ).join('');
   }
 
-  function openSearch() {
+  function openSearch(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var qParam = '';
+    try {
+      var params = new URLSearchParams(window.location.search);
+      qParam = (params.get('q') || '').trim();
+    } catch (err) {}
     var scrollbarW = window.innerWidth - document.documentElement.clientWidth;
     document.documentElement.classList.add('search-overlay-open');
     document.body.classList.add('search-overlay-open');
@@ -226,8 +249,8 @@ document.querySelectorAll('.mm-link').forEach(link => link.addEventListener('cli
     document.documentElement.style.overflow = 'hidden';
     overlay.classList.add('open');
     overlay.setAttribute('aria-hidden', 'false');
-    input.value = '';
-    renderCards('');
+    input.value = qParam;
+    renderCards(qParam);
     input.focus();
   }
   function closeSearch() {
@@ -245,13 +268,22 @@ document.querySelectorAll('.mm-link').forEach(link => link.addEventListener('cli
   }
 
   searchBtn.addEventListener('click', openSearch);
-  closeBtn.addEventListener('click', closeSearch);
-  overlay.addEventListener('click', e => { if (e.target === overlay) closeSearch(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeSearch(); });
-  input.addEventListener('input', () => renderCards(input.value));
-  form.addEventListener('submit', e => {
+  closeBtn.addEventListener('click', function(e) { e.preventDefault(); closeSearch(); });
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeSearch();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeSearch();
+  });
+  input.addEventListener('input', function() {
+    renderCards(input.value);
+  });
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeSearch();
+  });
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
-    const q = (input.value || '').trim();
+    var q = (input.value || '').trim();
     if (q) window.location.href = productsUrl + '?q=' + encodeURIComponent(q);
     else closeSearch();
   });
@@ -821,7 +853,6 @@ scrollReveal('.cta-actions',  { y: 40, duration: 0.7, delay: 0.24 });
   var dropdown = document.getElementById('ctaEmailDropdown');
   var wrap = trigger && trigger.closest('.cta-email-dropdown-wrap');
   if (!trigger || !dropdown || !wrap) return;
-  var email = 'superdistributionltd@gmail.com';
   var copyBtn = dropdown.querySelector('[data-action="copy"]');
 
   function open() {
@@ -849,8 +880,9 @@ scrollReveal('.cta-actions',  { y: 40, duration: 0.7, delay: 0.24 });
   if (copyBtn) {
     copyBtn.addEventListener('click', function(e) {
       e.preventDefault();
+      var emailToCopy = copyBtn.getAttribute('data-email') || 'superdistributionltd@gmail.com';
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(email).then(function() {
+        navigator.clipboard.writeText(emailToCopy).then(function() {
           copyBtn.textContent = 'Copied!';
           copyBtn.classList.add('copied');
           setTimeout(close, 1200);
@@ -981,7 +1013,7 @@ document.querySelectorAll('.p-item-art').forEach((el, i) => {
 
   var wa = document.createElement('a');
   wa.className = 'float-btn float-btn-wa';
-  wa.href = 'https://wa.me/23052345678?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20your%20products.';
+  wa.href = 'https://wa.me/23052513078?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20your%20products.';
   wa.target = '_blank';
   wa.rel = 'noopener noreferrer';
   wa.setAttribute('aria-label', 'WhatsApp');

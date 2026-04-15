@@ -9,7 +9,8 @@
   # Favicon: optional rewrite if favicon.ico missing; root favicon.ico preferred for Google
   RewriteRule ^favicon\.ico$ assets/images/favicon/sd-logo-32.png [L,NC]
 
-  # Homepage: redirect /index and /index.html to root so URL bar never shows "index"
+  # Homepage: redirect /index and /index.html to root so URL bar shows "/" not "index"
+  RewriteRule ^index$ / [R=301,L]
   RewriteRule ^index\.html?$ / [R=301,L]
 
   # Remove .html from browser: redirect /page.html -> /page (301)

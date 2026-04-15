@@ -230,52 +230,123 @@
   box-shadow: 0 12px 28px rgba(232, 23, 27, 0.12);
 }
 
-/* Founder card image – zoom on hover */
+/* Founder card – rounded box, card zoom on hover (no img hover) */
 .page-about .founder-card-pic {
   overflow: hidden;
   border-radius: 16px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.page-about .founder-card-pic img {
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.page-about .founder-card-pic:hover img {
+.page-about .founder-card-pic:hover {
   transform: scale(1.05);
 }
+.page-about .founder-card-pic img {
+  transform: scale(1.2) translateY(25px);
+  display: block;
+}
 
-/* Team cards – image scale and card lift */
+/* Team cards (Store & Sales) – same circle card hover as front office (card hover, no img hover) */
 .page-about .team-card-pic {
   overflow: hidden;
   border-radius: 50%;
-}
-.page-about .team-card-pic img {
   transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.page-about .team-card:hover .team-card-pic img {
-  transform: scale(1.08);
+.page-about .team-card:hover .team-card-pic {
+  transform: scale(1.05);
+}
+.page-about .team-card-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.85);
+  object-position: center 22%;
+  display: block;
 }
 .page-about .team-card--no-border:hover {
   transform: translateY(-6px);
 }
 
-/* Front office images – subtle zoom */
-.page-about .front-office-ebene {
+/* Store Team – center the circle cards row */
+.page-about .team-block--store .team-grid--five {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Marketing and Brand Department – dedicated card (circle + label) */
+.marketing-card-wrap {
+  text-align: center;
+  margin: 2rem auto 0;
+}
+.marketing-card {
+  display: inline-block;
+}
+.marketing-card__pic {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
   overflow: hidden;
-  border-radius: 16px;
+  margin: 0 auto;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.page-about .front-office-ebene img {
-  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.marketing-card:hover .marketing-card__pic {
+  transform: scale(1.05);
 }
-.page-about .front-office-ebene:hover img {
-  transform: scale(1.04);
+.marketing-card__pic .marketing-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.0);
+  object-position: center 22%;
+  display: block;
 }
+.marketing-card__name {
+  margin: 0.75rem 0 0.25rem;
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.marketing-card__label {
+  margin: 0 0 0;
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+/* Front office circle – same size as team cards (200px), card hover only (no img hover) */
 .page-about .front-office-anaija-arc {
   overflow: hidden;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.page-about .front-office-anaija:hover .front-office-anaija-arc {
+  transform: scale(1.05);
 }
 .page-about .front-office-anaija-arc img {
-  transition: transform 0.5s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.65);
+  object-position: center 22%;
+  display: block;
 }
-.page-about .front-office-anaija:hover .front-office-anaija-arc img {
-  transform: scale(1.06);
+@media (max-width: 640px) {
+  .page-about .front-office-anaija-arc {
+    width: 140px;
+    height: 140px;
+  }
 }
 
 /* Initial state for GSAP scroll animations (reduced motion respected) */

@@ -39,50 +39,7 @@
   var catParam = params.get('cat');
   var qParam = params.get('q');
 
-  // ——— Search overlay ———
-  var searchBtn = document.querySelector('.search-btn');
-  var searchOverlay = document.getElementById('searchOverlay');
-  var searchOverlayClose = document.getElementById('searchOverlayClose');
-  var searchForm = document.getElementById('searchForm');
-  var searchOverlayInput = document.getElementById('searchOverlayInput');
-  if (searchBtn && searchOverlay && searchOverlayClose && searchForm && searchOverlayInput) {
-    searchBtn.addEventListener('click', function() {
-      searchOverlay.classList.add('open');
-      searchOverlay.setAttribute('aria-hidden', 'false');
-      searchOverlayInput.value = qParam || '';
-      searchOverlayInput.focus();
-      document.body.style.overflow = 'hidden';
-    });
-    searchOverlayClose.addEventListener('click', function() {
-      searchOverlay.classList.remove('open');
-      searchOverlay.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    });
-    searchOverlay.addEventListener('click', function(e) {
-      if (e.target === searchOverlay) {
-        searchOverlay.classList.remove('open');
-        searchOverlay.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && searchOverlay.classList.contains('open')) {
-        searchOverlay.classList.remove('open');
-        searchOverlay.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-    });
-    searchForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var q = (searchOverlayInput.value || '').trim();
-      if (q) {
-        window.location.href = 'products.html?q=' + encodeURIComponent(q);
-      } else {
-        searchOverlay.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-    });
-  }
+  // Search overlay is fully handled in main.js (opens with ?q= prefilled and results rendered)
 
   // ——— Category tabs + card entrance ———
   var listenerAttached = false;

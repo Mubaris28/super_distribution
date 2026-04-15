@@ -105,6 +105,26 @@ img { display: block; max-width: 100%; }
   to { transform: rotate(360deg); }
 }
 
+/* ---------- FORM SUBMIT BUTTON LOADER ---------- */
+.btn-loader-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.btn-loader-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: page-loader-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+.btn-loader-text {
+  opacity: 0.95;
+}
+
 /* ---------- NAVBAR: PROMO BAR ---------- */
 .nav-promo-bar {
   height: 34px;
@@ -2201,7 +2221,7 @@ a.product-card-link:hover::after {
   top: auto;
   left: 50%;
   transform: translateX(-50%) translateY(6px);
-  min-width: 15rem;
+  min-width: 22rem;
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 8px 40px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.10);
@@ -2235,6 +2255,18 @@ a.product-card-link:hover::after {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #999;
+}
+.cta-email-dropdown-email {
+  display: block;
+  padding: 0 0.85rem 0.5rem;
+  font-size: 0.85rem;
+  color: var(--red);
+  white-space: nowrap;
+  text-decoration: none;
+}
+a.cta-email-dropdown-email:hover {
+  color: var(--red-dark);
+  text-decoration: underline;
 }
 .cta-email-dropdown-divider {
   height: 1px;
@@ -2478,21 +2510,34 @@ a.product-card-link:hover::after {
   transition-duration: 0.1s;
 }
 
-/* ---------- MOBILE MENU ---------- */
+/* ---------- MOBILE MENU — Hero section colors, tight layout ---------- */
 .mobile-menu {
   position: fixed;
-  top: 0; right: -100%;
-  width: min(320px, 100vw);
+  top: 0;
+  right: -100%;
+  width: min(300px, 90vw);
   height: 100vh;
   height: 100dvh;
-  background: var(--off-white);
+  background: linear-gradient(135deg, var(--dark) 0%, #2a0a0a 40%, var(--red-dark) 100%);
   z-index: 200;
   padding: 0;
   display: flex;
   flex-direction: column;
-  transition: right 0.4s var(--ease-smooth);
-  box-shadow: -8px 0 40px rgba(0,0,0,0.12);
-  border-left: 1px solid var(--light-gray);
+  transition: right 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -12px 0 48px rgba(0,0,0,0.35);
+  border-left: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+.mobile-menu::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 40% at 20% 30%, rgba(232,23,27,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 60% at 85% 70%, rgba(255,255,255,0.04) 0%, transparent 45%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .mobile-menu.open {
@@ -2502,26 +2547,23 @@ a.product-card-link:hover::after {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Subtle scrollbar for menu */
-.mobile-menu.open::-webkit-scrollbar { width: 6px; }
+.mobile-menu.open::-webkit-scrollbar { width: 4px; }
 .mobile-menu.open::-webkit-scrollbar-track { background: transparent; }
-.mobile-menu.open::-webkit-scrollbar-thumb { background: var(--light-gray); border-radius: 3px; }
-.mobile-menu.open::-webkit-scrollbar-thumb:hover { background: var(--gray); }
+.mobile-menu.open::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
 
 .mobile-menu-close {
   position: sticky;
   top: 0;
-  left: 0;
-  width: 48px; height: 48px;
-  margin: 1rem 1.25rem 0.5rem auto;
-  margin-left: auto;
-  margin-right: 1.25rem;
-  background: var(--white);
-  color: var(--red);
-  border: 2px solid var(--light-gray);
+  width: 40px;
+  height: 40px;
+  margin: 0.75rem 1rem 0.5rem auto;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.95);
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: 50%;
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2531,49 +2573,49 @@ a.product-card-link:hover::after {
 }
 
 .mobile-menu-close:hover {
-  background: var(--red-pale);
-  border-color: var(--red);
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border-color: rgba(255,255,255,0.3);
 }
 
-.mobile-menu ul {
+.mobile-menu ul,
+.mobile-menu .mobile-menu-list {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 1rem 1.25rem 2.5rem;
+  padding: 0.25rem 1.25rem 2rem;
   list-style: none;
 }
 
-.mobile-menu li {
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-
-.mobile-menu li:last-child {
+.mobile-menu > ul li,
+.mobile-menu .mobile-menu-list li {
   border-bottom: none;
 }
 
 .mm-link {
   display: block;
   font-family: var(--font-head);
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: var(--dark);
-  padding: 1rem 1rem 1rem 1.25rem;
-  min-height: 48px;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.92);
+  padding: 0.65rem 0.6rem;
+  min-height: 42px;
   box-sizing: border-box;
-  transition: color 0.2s, background 0.2s, padding-left 0.2s;
-  border-left: 3px solid transparent;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  transition: color 0.2s, background 0.2s;
+  text-decoration: none;
+  border-radius: 6px;
 }
 
 .mm-link:hover {
-  color: var(--red);
-  background: rgba(232, 23, 27, 0.06);
-  padding-left: 1.5rem;
-  border-left-color: var(--red);
+  color: #fff;
+  background: rgba(255,255,255,0.08);
 }
 
 .mm-link:active {
-  background: rgba(232, 23, 27, 0.1);
+  background: rgba(255,255,255,0.12);
 }
 
 .mobile-menu-overlay {
@@ -2582,12 +2624,13 @@ a.product-card-link:hover::after {
   background: rgba(0,0,0,0);
   z-index: 150;
   pointer-events: none;
-  transition: background 0.45s;
+  transition: background 0.35s ease;
 }
 
 .mobile-menu-overlay.active,
 .mobile-menu-overlay.open {
   background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
   pointer-events: all;
 }
 
@@ -2932,62 +2975,78 @@ a.product-card-link:hover::after {
   white-space: nowrap;
   text-decoration: none;
 }
-.nav-dropdown li a:hover,
-.nav-dropdown li a.active {
+.nav-dropdown li a:hover {
   background: var(--red-pale);
   color: var(--red);
 }
 .has-dropdown.active > .nav-link,
-.has-dropdown > .nav-link.active {
+.has-dropdown#productsDropdown > .nav-link.active {
   color: var(--red);
 }
 
-/* ---- Mobile sub-menu ---- */
+/* ---- Mobile sub-menu (hero panel, no gap) ---- */
 .mm-has-sub .mm-parent {
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
   user-select: none;
+  text-decoration: none;
+  color: rgba(255,255,255,0.92);
 }
-.mm-chevron { transition: transform 0.25s ease; flex-shrink: 0; }
-/* Dropdown hidden until Products is clicked — no space when closed */
+.mm-has-sub .mm-parent:hover {
+  color: #fff;
+}
+.mm-chevron {
+  transition: transform 0.28s ease;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+  opacity: 0.75;
+  font-size: 0.6em;
+  vertical-align: middle;
+}
+
+/* Closed: collapse */
 .mm-sub {
   list-style: none;
   margin: 0;
+  padding: 0;
   overflow: hidden;
-  visibility: hidden;
+  max-height: 0;
   opacity: 0;
-  transition: max-height 0.3s ease, opacity 0.2s ease, visibility 0.2s;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
 }
 .mm-sub:not(.open) {
-  max-height: 0;
-  min-height: 0;
-  height: 0;
-  padding: 0;
-  border: none;
+  visibility: hidden;
 }
+
+/* Open: dropdown visible, tight */
 .mm-sub.open {
-  max-height: 360px;
-  visibility: visible;
+  max-height: 420px;
   opacity: 1;
-  padding-left: 0.5rem;
+  visibility: visible;
+  padding: 0.2rem 0 0.5rem 0.4rem;
+  margin: 0.15rem 0 0 0.4rem;
+  border-left: 3px solid rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.15);
+  border-radius: 0 6px 6px 0;
+}
+.mm-sub li {
+  border-bottom: none;
 }
 .mm-sub li a.mm-link {
   display: block;
-  padding: 0.5rem 0 0.5rem 1rem;
-  font-size: 0.95rem;
+  padding: 0.4rem 0.5rem 0.4rem 0.6rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  color: var(--red);
-  border-left: 3px solid var(--red);
-  margin: 0.15rem 0;
+  color: rgba(255,255,255,0.88);
   text-decoration: none;
   transition: color 0.15s, background 0.15s;
-  border-radius: 0 6px 6px 0;
+  border-radius: 4px;
 }
 .mm-sub li a.mm-link:hover {
-  color: var(--red-dark);
-  background: rgba(232, 23, 27, 0.1);
+  color: #fff;
+  background: rgba(255,255,255,0.1);
 }
 
 /* ============================================

@@ -99,6 +99,11 @@ $phoneDisplay = $phone ? $phone : 'Not provided';
 $fullName     = $firstName . ' ' . $lastName;
 $now          = date('d M Y, H:i') . ' (UTC)';
 
+// Route to orders inbox for wholesale/bulk order; otherwise enquiries/contact inbox
+$isOrder = ($subject === 'wholesale');
+$toEmail = $isOrder && defined('TO_EMAIL_ORDERS') ? TO_EMAIL_ORDERS : TO_EMAIL;
+$toName  = $isOrder && defined('TO_NAME_ORDERS')  ? TO_NAME_ORDERS  : TO_NAME;
+
 /* ── Shared layout helpers ────────────────────────────────────── */
 $tableRow = function (string $label, string $value): string {
     return '
@@ -124,7 +129,7 @@ $htmlBody = '<!DOCTYPE html>
         <tr>
           <td>
             <p style="margin:0 0 4px;color:rgba(255,255,255,0.7);font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:600;">Super Distribution</p>
-            <h1 style="margin:0;color:#fff;font-size:24px;font-weight:700;line-height:1.2;">&#9993; New Contact Message</h1>
+            <h1 style="margin:0;color:#fff;font-size:24px;font-weight:700;line-height:1.2;">&#9993; ' . ($isOrder ? 'New Order Enquiry' : 'New Contact Message') . '</h1>
             <p style="margin:8px 0 0;color:rgba(255,255,255,0.75);font-size:13px;">Received ' . $now . '</p>
           </td>
           <td style="text-align:right;width:80px;">
@@ -230,7 +235,8 @@ $autoReplyHtml = '<!DOCTYPE html>
       <p style="margin:0 0 8px;font-size:14px;color:#555;line-height:1.7;">Need to reach us directly?</p>
       <table cellpadding="0" cellspacing="0" style="font-size:13px;color:#555;">
         <tr><td style="padding:3px 0;">&#128222;&nbsp;</td><td><a href="tel:+23052345678" style="color:#C8000A;text-decoration:none;">+230 5234 5678</a></td></tr>
-        <tr><td style="padding:3px 0;">&#9993;&nbsp;</td><td><a href="mailto:' . TO_EMAIL . '" style="color:#C8000A;text-decoration:none;">' . TO_EMAIL . '</a></td></tr>
+        <tr><td style="padding:3px 0;">&#128230;&nbsp;</td><td><strong>Orders:</strong> <a href="mailto:' . (defined('TO_EMAIL_ORDERS') ? TO_EMAIL_ORDERS : TO_EMAIL) . '" style="color:#C8000A;text-decoration:none;">' . (defined('TO_EMAIL_ORDERS') ? TO_EMAIL_ORDERS : TO_EMAIL) . '</a></td></tr>
+        <tr><td style="padding:3px 0;">&#9993;&nbsp;</td><td><strong>Enquiries:</strong> <a href="mailto:' . TO_EMAIL . '" style="color:#C8000A;text-decoration:none;">' . TO_EMAIL . '</a></td></tr>
         <tr><td style="padding:3px 0;">&#128205;&nbsp;</td><td style="color:#555;">Port Louis, Mauritius</td></tr>
       </table>
     </td>
@@ -256,7 +262,8 @@ $autoReplyText = "Hi $firstName,\n\n"
     . "Subject: $subjectLabel\n\n"
     . "Contact us directly:\n"
     . "Phone: +230 5234 5678\n"
-    . "Email: " . TO_EMAIL . "\n\n"
+    . (defined('TO_EMAIL_ORDERS') ? "Orders: " . TO_EMAIL_ORDERS . "\n" : "")
+    . "Enquiries: " . TO_EMAIL . "\n\n"
     . "Super Distribution Ltd.\n"
     . "Port Louis, Mauritius\n";
 
@@ -273,7 +280,7 @@ try {
     $mail->CharSet    = 'UTF-8';
 
     $mail->setFrom(FROM_EMAIL, FROM_NAME);
-    $mail->addAddress(TO_EMAIL, TO_NAME);
+    $mail->addAddress($toEmail, $toName);
     $mail->addReplyTo($email, $fullName);
 
     $mail->isHTML(true);
@@ -287,7 +294,7 @@ try {
     $mail->clearAddresses();
     $mail->clearReplyTos();
     $mail->addAddress($email, $fullName);
-    $mail->addReplyTo(TO_EMAIL, TO_NAME);
+    $mail->addReplyTo($toEmail, $toName);
     $mail->Subject = 'We received your message — Super Distribution';
     $mail->Body    = $autoReplyHtml;
     $mail->AltBody = $autoReplyText;
@@ -307,6 +314,6 @@ try {
     http_response_code(500);
     echo json_encode([
         'success' => false,
-        'message' => 'Could not send right now. Please email us directly at ' . TO_EMAIL
+        'message' => 'Could not send right now. For enquiries email ' . TO_EMAIL . ' or for orders ' . (defined('TO_EMAIL_ORDERS') ? TO_EMAIL_ORDERS : TO_EMAIL)
     ]);
 }

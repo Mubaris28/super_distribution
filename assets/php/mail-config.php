@@ -2,20 +2,25 @@
 /**
  * Shared SMTP config — used by contact-mail.php and reseller-mail.php
  *
+ * Two recipient inboxes:
+ * - TO_EMAIL: contact, enquiries, general messages
+ * - TO_EMAIL_ORDERS: business / wholesale orders (contact form subject "Wholesale / Bulk Order")
+ *
  * HOW TO SET UP (one-time):
- * 1. Enable 2-Step Verification on your Google account:
- *    https://myaccount.google.com/security
- * 2. Generate a Gmail App Password:
- *    https://myaccount.google.com/apppasswords
- *    → App: "Mail", Device: "Other (custom name)" → "Super Distribution"
- * 3. Paste the 16-character password in SMTP_PASS below (no spaces).
- * 4. Change TO_EMAIL to the inbox where you want to RECEIVE the enquiries.
+ * 1. Enable 2-Step Verification on your Google account.
+ * 2. Generate a Gmail App Password; paste in SMTP_PASS below.
  */
 define('SMTP_HOST',  'smtp.gmail.com');
 define('SMTP_PORT',  587);                              // 587 = STARTTLS
-define('SMTP_USER',  'mubarismuhammed33@gmail.com');    // Gmail address sending the mail
-define('SMTP_PASS',  'ozfp udpe wmvq xqda');   // ← REQUIRED: paste Gmail App Password (16 chars, no spaces) or mail will fail
-define('FROM_EMAIL', 'mubarismuhammed33@gmail.com');    // must match SMTP_USER for Gmail
+define('SMTP_USER',  'superdistributionltd@gmail.com');  // Gmail address sending the mail
+define('SMTP_PASS',  'frml hxyi jbiw splg');            // Gmail App Password (16 chars)
+define('FROM_EMAIL', 'superdistributionltd@gmail.com'); // must match SMTP_USER for Gmail
 define('FROM_NAME',  'Super Distribution Website');
-define('TO_EMAIL',   'mubarismuhammed33@gmail.com');    // inbox that receives form submissions
+
+// Enquiries, contact, general messages
+define('TO_EMAIL',   'superdistributionltd@gmail.com');
 define('TO_NAME',    'Super Distribution');
+
+// Business / wholesale orders (used when contact form subject is "Wholesale / Bulk Order")
+define('TO_EMAIL_ORDERS',   'order.superdistribution@gmail.com');
+define('TO_NAME_ORDERS',    'Super Distribution (Orders)');

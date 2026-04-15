@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -47,12 +47,21 @@
         &amp; Retail &nbsp;|&nbsp; ⭐ 4.9 Star Rated</span>
     </div>
     <nav class="navbar">
-      <a href="index.html" class="nav-logo">
+      <a href="/" class="nav-logo">
         <img src="assets/images/logo/SD_LOGO-01.png" alt="Super Distribution" class="nav-logo-img">
       </a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="about.html" class="nav-link active">About</a></li>
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li class="has-dropdown" id="aboutDropdown">
+          <a href="about.html" class="nav-link">About <svg class="dropdown-chevron" width="12" height="12"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" />
+            </svg></a>
+          <ul class="nav-dropdown">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </li>
         <li class="has-dropdown" id="productsDropdown">
           <a href="products.html" class="nav-link">Products <svg class="dropdown-chevron" width="12" height="12"
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -88,10 +97,15 @@
   <section class="cat-page-hero about-hero-compact">
     <div class="cat-page-hero-inner">
       <span class="cat-page-hero-tag cat-page-hero-tag--large">Our Story</span>
-      <div class="about-hero-logo-wrap">
-        <span class="about-hero-logo about-hero-logo--no-link"><img src="assets/images/logo/SD_LOGO-01.png" alt="Super Distribution" class="about-hero-logo-img"></span>
+      <div class="about-hero-compact-row">
+        <div class="about-hero-logo-wrap">
+          <span class="about-hero-logo about-hero-logo--no-link"><img src="assets/images/logo/SD_LOGO-01.png"
+              alt="Super Distribution" class="about-hero-logo-img"></span>
+        </div>
+        <p class="cat-page-hero-sub">We connect households and businesses across Mauritius with trustworthy brands in
+          several categories such as Home Care, Personal Care, Religious Products, Stationery and Industrial Packaging.
+        </p>
       </div>
-      <p class="cat-page-hero-sub">We connect households and businesses across Mauritius with trustworthy brands in several categories such as Home Care, Personal Care, Religious Products, Stationery and Industrial Packaging.</p>
     </div>
   </section>
 
@@ -99,60 +113,86 @@
     <div class="about-us-inner">
       <div class="about-split-block">
         <div class="about-split-img">
-          <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=520&h=340&fit=crop" alt="Distribution across Mauritius" width="520" height="340" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=520&h=340&fit=crop"
+            alt="Distribution across Mauritius" width="520" height="340" loading="lazy">
         </div>
         <div class="about-split-body">
           <h3 class="about-split-title">Who we are</h3>
-          <p class="about-split-text">Super Distribution Ltd. is Mauritius's trusted distributor for household essentials, eco-friendly tableware, personal care, and religious products. We work with retailers, wholesalers, and businesses across the island to keep shelves stocked with quality goods.</p>
+          <p class="about-split-text">Super Distribution Ltd. is Mauritius's trusted distributor for household
+            essentials, eco-friendly tableware, personal care, and religious products. We work with retailers,
+            wholesalers, and businesses across the island to keep shelves stocked with quality goods.</p>
         </div>
       </div>
       <div class="about-split-block about-split-block--reverse">
         <div class="about-split-img">
-          <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=520&h=340&fit=crop" alt="Quality products and brands" width="520" height="340" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=520&h=340&fit=crop"
+            alt="Quality products and brands" width="520" height="340" loading="lazy">
         </div>
         <div class="about-split-body">
           <h3 class="about-split-title">What we do</h3>
-          <p class="about-split-text">At Super Distribution Ltd, we combine quality, affordability, and sustainability. We source premium raw materials and convert them into dependable products while maintaining environmentally responsible practices, including eco-friendly solutions like Super Bio compostable tableware.</p>
-          <p class="about-split-text">Beyond manufacturing, we distribute well-known brands such as Ujala, Margo, and Maya incense, ensuring consistent supply and reliable delivery. With fast dispatch and flexible order quantities, we make it easy for retailers and wholesalers to keep their shelves stocked and their customers satisfied.</p>
+          <p class="about-split-text">At Super Distribution Ltd, we combine quality, affordability, and sustainability.
+            We source premium raw materials and convert them into dependable products while maintaining environmentally
+            responsible practices, including eco-friendly solutions like Super Bio compostable tableware.</p>
+          <p class="about-split-text">Beyond manufacturing, we distribute well-known brands such as Ujala, Margo, and
+            Maya incense, ensuring consistent supply and reliable delivery. With fast dispatch and flexible order
+            quantities, we make it easy for retailers and wholesalers to keep their shelves stocked and their customers
+            satisfied.</p>
         </div>
       </div>
       <div class="about-split-block">
         <div class="about-split-img">
-          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=520&h=340&fit=crop" alt="Our mission" width="520" height="340" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=520&h=340&fit=crop" alt="Our mission"
+            width="520" height="340" loading="lazy">
         </div>
         <div class="about-split-body">
           <h3 class="about-split-title">Mission</h3>
-          <p class="about-split-text">To build lasting trust with our customers by providing high-quality, reliable, and innovative products and services at competitive prices, while ensuring efficient distribution and exceptional service.</p>
+          <p class="about-split-text">To build lasting trust with our customers by providing high-quality, reliable, and
+            innovative products and services at competitive prices, while ensuring efficient distribution and
+            exceptional service.</p>
         </div>
       </div>
       <div class="about-split-block about-split-block--reverse">
         <div class="about-split-img">
-          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=520&h=340&fit=crop" alt="Our vision" width="520" height="340" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=520&h=340&fit=crop" alt="Our vision"
+            width="520" height="340" loading="lazy">
         </div>
         <div class="about-split-body">
           <h3 class="about-split-title">Vision</h3>
-          <p class="about-split-text">To become a trusted leader in manufacturing and distribution by delivering sustainable products, supporting our partners, and continuously improving to meet the changing needs of our customers and communities.</p>
+          <p class="about-split-text">To become a trusted leader in manufacturing and distribution by delivering
+            sustainable products, supporting our partners, and continuously improving to meet the changing needs of our
+            customers and communities.</p>
         </div>
       </div>
       <div class="about-split-block">
         <div class="about-split-img">
-          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=520&h=340&fit=crop" alt="Sustainability" width="520" height="340" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=520&h=340&fit=crop"
+            alt="Sustainability" width="520" height="340" loading="lazy">
         </div>
         <div class="about-split-body">
           <h3 class="about-split-title">Sustainability Goals</h3>
-          <p class="about-split-text">We are committed to reducing our environmental footprint and promoting responsible consumption. Our sustainability goals include expanding our range of compostable and eco-friendly products, such as Super Bio tableware, and working with suppliers who share our commitment to sustainable practices.</p>
-          <p class="about-split-text">We aim to minimise waste in our operations, use recyclable or biodegradable packaging where possible, and support the transition to a circular economy. By offering quality products that are better for the planet, we help our retail and wholesale partners meet the growing demand for sustainable options across Mauritius.</p>
+          <p class="about-split-text">We are committed to reducing our environmental footprint and promoting responsible
+            consumption. Our sustainability goals include expanding our range of compostable and eco-friendly products,
+            such as Super Bio tableware, and working with suppliers who share our commitment to sustainable practices.
+          </p>
+          <p class="about-split-text">We aim to minimise waste in our operations, use recyclable or biodegradable
+            packaging where possible, and support the transition to a circular economy. By offering quality products
+            that are better for the planet, we help our retail and wholesale partners meet the growing demand for
+            sustainable options across Mauritius.</p>
 
           <h4 class="about-split-subtitle">Eco Friendly Products</h4>
-          <p class="about-split-text">Providing eco friendly products to the market. We are committed to reducing environmental impact through sustainable materials, compostable packaging, and responsible sourcing so that quality and affordability go hand in hand with care for the planet.</p>
+          <p class="about-split-text">Providing eco friendly products to the market. We are committed to reducing
+            environmental impact through sustainable materials, compostable packaging, and responsible sourcing so that
+            quality and affordability go hand in hand with care for the planet.</p>
 
           <h4 class="about-split-subtitle">Community &amp; Social Impact</h4>
-          <p class="about-split-text">We engage in social activities to foster connection and the well-being of needy people in our community. Giving back is part of who we are.</p>
+          <p class="about-split-text">We engage in social activities to foster connection and the well-being of needy
+            people in our community. Giving back is part of who we are.</p>
         </div>
       </div>
       <div class="about-values-cards">
         <h3 class="about-split-title">Our Values</h3>
-        <p class="about-values-intro">At Super Distribution Ltd, our values guide everything we do and shape how we serve our customers and partners.</p>
+        <p class="about-values-intro">At Super Distribution Ltd, our values guide everything we do and shape how we
+          serve our customers and partners.</p>
         <div class="about-values-grid">
           <div class="about-value-card">
             <span class="about-value-card-title">Quality</span>
@@ -168,11 +208,13 @@
           </div>
           <div class="about-value-card">
             <span class="about-value-card-title">Sustainability</span>
-            <p>We promote environmentally responsible practices, including eco-friendly solutions such as compostable products.</p>
+            <p>We promote environmentally responsible practices, including eco-friendly solutions such as compostable
+              products.</p>
           </div>
           <div class="about-value-card">
             <span class="about-value-card-title">Efficiency &amp; Reliability</span>
-            <p>We ensure fast dispatch, dependable supply, and flexible service for both wholesale and retail partners.</p>
+            <p>We ensure fast dispatch, dependable supply, and flexible service for both wholesale and retail partners.
+            </p>
           </div>
         </div>
       </div>
@@ -184,94 +226,118 @@
       <section class="team-section team-section--dark" id="our-team">
         <div class="team-section-inner">
           <h2 class="team-heading team-heading--prominent">Our <em>Team</em></h2>
-          <p class="team-description team-description--above">Our team brings together expertise in operations, customer service, and sales. We work with a shared commitment to quality and reliability, supporting our founder’s vision to connect businesses and communities with trusted products and dependable service.</p>
+          <p class="team-description team-description--above">Our team brings together expertise in operations, customer
+            service, and sales. We work with a shared commitment to quality and reliability, supporting our founder’s
+            vision to connect businesses and communities with trusted products and dependable service.</p>
 
           <div class="founder-card founder-card--no-border">
             <div class="founder-card-pic">
-              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=533&fit=crop" alt="Founder" width="340" height="453" loading="lazy">
+              <img src="assets/images/teams/FOUNDER.jpg" alt="Founder &amp; CEO" class="founder-card-img"
+                loading="lazy">
+                <span class="front-office-ebene-label">Kavish Danny</span>
             </div>
             <div class="founder-card-content">
-              <h3 class="founder-name">FOUNDER</h3>
+              <h3 class="founder-name">Kavish Danny</h3>
               <p class="founder-role">Founder &amp; CEO</p>
-              <p class="founder-bio">The founder of Super Distribution is an entrepreneur driven by a clear vision: to build a reliable and customer-focused distribution company that delivers quality products while strengthening the communities it serves. Leadership through example, integrity, and long-term relationships continue to guide the company as it expands.</p>
+              <p class="founder-bio">The founder of Super Distribution is an entrepreneur driven by a clear vision: to
+                build a reliable and customer-focused distribution company that delivers quality products while
+                strengthening the communities it serves. Leadership through example, integrity, and long-term
+                relationships continue to guide the company as it expands.</p>
             </div>
           </div>
 
-          <div class="team-block">
-            <h3 class="team-category-title">Front Office</h3>
-            <div class="front-office-hero">
-              <div class="front-office-ebene">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1000&h=560&fit=crop" alt="Ebene team" width="1000" height="560" loading="lazy">
-                <span class="front-office-ebene-label">Ebene Team</span>
-              </div>
-              <div class="front-office-anaija">
-                <div class="front-office-anaija-arc">
-                  <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop" alt="Anaija" width="400" height="400" loading="lazy">
-                </div>
-                <span class="front-office-anaija-name">Anaija</span>
-              </div>
-            </div>
-            <p class="team-description team-description--group">The Front Office team is the first point of contact for customers and plays an important role in daily operations. They handle customer inquiries, process orders, manage billing, and coordinate with the store, packing, and delivery teams to ensure smooth service. Their efficiency, communication, and customer-focused approach help create a positive experience while supporting the overall workflow of the business.</p>
-          </div>
-
-          <div class="team-block">
-            <h3 class="team-category-title">Store Team</h3>
-            <div class="team-grid team-grid--three">
-              <div class="team-card team-card--no-border">
-                <div class="team-card-pic">
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop" alt="Ravi" width="200" height="200" loading="lazy">
-                </div>
-                <h4 class="team-card-name">Ravi</h4>
-              </div>
-              <div class="team-card team-card--no-border">
-                <div class="team-card-pic">
-                  <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop" alt="Devika" width="200" height="200" loading="lazy">
-                </div>
-                <h4 class="team-card-name">Devika</h4>
-              </div>
-              <div class="team-card team-card--no-border">
-                <div class="team-card-pic">
-                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop" alt="Mum" width="200" height="200" loading="lazy">
-                </div>
-                <h4 class="team-card-name">Mum</h4>
-              </div>
-            </div>
-            <p class="team-description team-description--group">The Store Team manages inventory, organizes products, and ensures that everything is stocked and ready for packing and delivery. They maintain the store's orderliness, track stock levels, and support the front office and delivery teams by preparing orders accurately. Their attention to detail and efficiency keep operations running smoothly and help maintain high-quality service for customers.</p>
-          </div>
 
           <div class="team-block">
             <h3 class="team-category-title">Sales Team</h3>
             <div class="team-grid team-grid--four">
               <div class="team-card team-card--no-border">
                 <div class="team-card-pic">
-                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop" alt="Clarel" width="200" height="200" loading="lazy">
+                  <img src="assets/images/teams/1.jpg" alt="Sales Team" class="team-card-img" loading="lazy">
                 </div>
-                <h4 class="team-card-name">Clarel</h4>
               </div>
               <div class="team-card team-card--no-border">
                 <div class="team-card-pic">
-                  <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=200&h=200&fit=crop" alt="Arvin" width="200" height="200" loading="lazy">
+                  <img src="assets/images/teams/7.jpg" alt="Sales Team" class="team-card-img" loading="lazy">
                 </div>
-                <h4 class="team-card-name">Arvin</h4>
               </div>
               <div class="team-card team-card--no-border">
                 <div class="team-card-pic">
-                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop" alt="Vidur" width="200" height="200" loading="lazy">
+                  <img src="assets/images/teams/8.jpg" alt="Sales Team" class="team-card-img" loading="lazy">
                 </div>
-                <h4 class="team-card-name">Vidur</h4>
               </div>
               <div class="team-card team-card--no-border">
                 <div class="team-card-pic">
-                  <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop" alt="Avinash" width="200" height="200" loading="lazy">
+                  <img src="assets/images/teams/2.jpg" alt="Sales Team" class="team-card-img" loading="lazy">
                 </div>
-                <h4 class="team-card-name">Avinash</h4>
               </div>
             </div>
-            <p class="team-description team-description--group">The Sales Team drives customer engagement and business growth by identifying opportunities, managing client relationships, and closing orders. They coordinate closely with the front office, store, and delivery teams to ensure that customer needs are met promptly and accurately. Their market knowledge, communication skills, and customer-focused approach play a vital role in increasing sales and maintaining strong client satisfaction.</p>
+            <p class="team-description team-description--group">The Sales Team drives customer engagement and business
+              growth by identifying opportunities, managing client relationships, and closing orders. They coordinate
+              closely with the front office, store, and delivery teams to ensure that customer needs are met promptly
+              and accurately. Their market knowledge, communication skills, and customer-focused approach play a vital
+              role in increasing sales and maintaining strong client satisfaction.</p>
           </div>
-      <div class="cat-cta-wrap">
-        <a href="contact.html" class="cat-cta-btn">Get in touch →</a>
-      </div>
+
+
+          <div class="team-block team-block--store">
+            <h3 class="team-category-title">Store Team</h3>
+            <div class="team-grid team-grid--five">
+              <div class="team-card team-card--no-border">
+                <div class="team-card-pic">
+                  <img src="assets/images/teams/4.jpg" alt="Store Team" class="team-card-img" loading="lazy">
+                </div>
+              </div>
+              <div class="team-card team-card--no-border">
+                <div class="team-card-pic">
+                  <img src="assets/images/teams/3.jpg" alt="Store Team" class="team-card-img" loading="lazy">
+                </div>
+              </div>
+              <div class="team-card team-card--no-border">
+                <div class="team-card-pic">
+                  <img src="assets/images/teams/6.jpg" alt="Store Team" class="team-card-img" loading="lazy">
+                </div>
+              </div>
+              <div class="team-card team-card--no-border">
+                <div class="team-card-pic">
+                  <img src="assets/images/teams/5.jpg" alt="Store Team" class="team-card-img" loading="lazy">
+                </div>
+              </div>
+              <div class="team-card team-card--no-border">
+                <div class="team-card-pic">
+                  <img src="assets/images/teams/9.jpg" alt="Store Team" class="team-card-img" loading="lazy">
+                </div>
+              </div>
+
+            </div>
+            <p class="team-description team-description--group">The Store Team manages inventory, organizes products,
+              and ensures that everything is stocked and ready for packing and delivery. They maintain the store's
+              orderliness, track stock levels, and support the front office and delivery teams by preparing orders
+              accurately. Their attention to detail and efficiency keep operations running smoothly and help maintain
+              high-quality service for customers.</p>
+          </div>
+
+         
+          <div class="team-block">
+            <h3 class="team-category-title">Marketing and Brand Department</h3>
+            <p class="team-description team-description--group">The Front Office team is the first point of contact for
+              customers and plays an important role in daily operations. They handle customer inquiries, process orders,
+              manage billing, and coordinate with the store, packing, and delivery teams to ensure smooth service. Their
+              efficiency, communication, and customer-focused approach help create a positive experience while
+              supporting the overall workflow of the business.</p>
+            <div class="marketing-card-wrap">
+              <div class="marketing-card">
+                <div class="marketing-card__pic">
+                  <img src="assets/images/teams/ebene-team/ceo.jpg" alt="Basant Lallah – Marketing and Brand Department" class="marketing-card__img" loading="lazy">
+                </div>
+                <p class="marketing-card__name">Basant Lallah</p>
+                <p class="marketing-card__label">Marketing and brand strategy</p>
+              </div>
+            </div>
+           
+          </div>
+          <div class="cat-cta-wrap">
+            <a href="contact.html" class="cat-cta-btn">Get in touch →</a>
+          </div>
         </div>
       </section>
     </div>
@@ -293,7 +359,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <a href="index.html" class="footer-logo">
+        <a href="/" class="footer-logo">
           <img src="assets/images/logo/SD_LOGO-01.png" alt="Super Distribution" class="footer-logo-img">
         </a>
         <p>Mauritius's Trusted Home Care Goods Distributor. We supply UJALA, MARGO, Maya, Super Bio and everyday
@@ -313,8 +379,12 @@
                 d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
             </svg>
           </a>
-          <a href="https://wa.me/23052513078" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-link">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <a href="https://wa.me/23052513078" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+            class="social-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
           </a>
         </div>
       </div>
@@ -341,6 +411,7 @@
         <h4>Company</h4>
         <ul>
           <li><a href="about.html">About Us</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="career.html">Careers</a></li>
           <li><a href="reseller-application.html">Become a Partner</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -351,22 +422,29 @@
         <h4>Contact</h4>
         <ul>
           <li>📍 Royal Road Terre Rouge, Pamplemousses, Mauritius</li>
-          <li>📞 52513078</li>
-          <li>✉️ superdistributionltd@gmail.com</li>
+          <li>📞 5 251-3078</li>
+          <li>📦 Orders: <a href="mailto:order.superdistribution@gmail.com">order.superdistribution@gmail.com</a></li>
+          <li>✉️ Enquiries: <a href="mailto:superdistributionltd@gmail.com">superdistributionltd@gmail.com</a></li>
           <li>🕐 Mon–Sat: 9:00 AM – 5:00 PM</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 Super Distribution Ltd. All rights reserved.</p>
+      <p>Powered by <a href="https://www.theflashgroups.com/" target="_blank" rel="noopener noreferrer">Flash Communications Ltd.</a></p>
     </div>
   </footer>
 
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <button class="mobile-menu-close" id="menuClose" type="button" aria-label="Close menu">✕</button>
     <ul class="mobile-menu-list">
-      <li><a href="index.html" class="mm-link">Home</a></li>
-      <li><a href="about.html" class="mm-link">About</a></li>
+      <li><a href="/" class="mm-link">Home</a></li>
+      <li class="mm-has-sub">
+        <a href="about.html" class="mm-parent mm-link">About <span class="mm-chevron" aria-hidden="true">▼</span></a>
+        <ul class="mm-sub">
+          <li><a href="about.html" class="mm-link">About Us</a></li>
+          <li><a href="gallery.html" class="mm-link">Gallery</a></li>
+        </ul>
+      </li>
       <li class="mm-has-sub">
         <a href="products.html" class="mm-parent mm-link">Products <span class="mm-chevron"
             aria-hidden="true">▼</span></a>
@@ -391,7 +469,7 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/nav.js"></script>
   <script>
-    (function() {
+    (function () {
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
       gsap.registerPlugin(ScrollTrigger);
 
@@ -399,7 +477,7 @@
       if (prefersReduced) return;
 
       /* Split blocks: fade + slide up when in view */
-      gsap.utils.toArray('.page-about .about-split-block').forEach(function(block, i) {
+      gsap.utils.toArray('.page-about .about-split-block').forEach(function (block, i) {
         gsap.fromTo(block, { opacity: 0, y: 48 }, {
           opacity: 1,
           y: 0,
@@ -445,7 +523,7 @@
       }
 
       /* Team blocks (Front Office, Store, Sales) */
-      gsap.utils.toArray('.page-about .team-block').forEach(function(block) {
+      gsap.utils.toArray('.page-about .team-block').forEach(function (block) {
         gsap.fromTo(block, { opacity: 0, y: 36 }, {
           opacity: 1,
           y: 0,

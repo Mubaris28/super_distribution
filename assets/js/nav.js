@@ -18,16 +18,13 @@
   };
 
   function initDropdowns() {
-    var dropdown = document.getElementById('productsDropdown');
-    if (!dropdown) return;
-    var link = dropdown.querySelector('.nav-link');
-    if (!link) return;
-
-    /* Click on link still goes to products.html; dropdown opens on hover (CSS). Click outside closes. */
+    var productsDropdown = document.getElementById('productsDropdown');
+    var aboutDropdown = document.getElementById('aboutDropdown');
 
     /* Close dropdown when clicking outside */
     document.addEventListener('click', function(e) {
-      if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
+      if (productsDropdown && !productsDropdown.contains(e.target)) productsDropdown.classList.remove('open');
+      if (aboutDropdown && !aboutDropdown.contains(e.target)) aboutDropdown.classList.remove('open');
     });
   }
 
